@@ -14,6 +14,8 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.item.demo.activity.recycler.PullToRefreshUseActivity;
 import com.item.demo.activity.recycler.TestOneActivity;
 import com.item.demo.activity.recycler.adapter.HomeAdapter;
+import com.item.demo.activity.refresh.BasicUsingActivity;
+import com.item.demo.activity.refresh.RefreshActivity;
 import com.item.demo.activity.refresh.TextRefreshActivity;
 
 import java.util.ArrayList;
@@ -35,7 +37,8 @@ public class MainActivity extends AppCompatActivity {
         btnTwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, TextRefreshActivity.class));
+
+                startActivity(new Intent(MainActivity.this, RefreshActivity.class));
             }
         });
     }

@@ -1,6 +1,7 @@
 package com.item.demo.activity.recycler.entity;
 
 /**
+ *
  * Created by wuzongjie on 2017/10/23.
  */
 

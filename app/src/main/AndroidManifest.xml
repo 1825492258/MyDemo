@@ -18,7 +18,10 @@
         </activity>
         <activity android:name=".activity.recycler.TestOneActivity" />
         <activity android:name=".activity.recycler.PullToRefreshUseActivity" />
-        <activity android:name=".activity.refresh.TextRefreshActivity"></activity>
+        <activity android:name=".activity.refresh.TextRefreshActivity" />
+        <activity android:name=".activity.refresh.BasicUsingActivity" />
+        <activity android:name=".activity.refresh.RefreshActivity" />
+        <activity android:name=".activity.refresh.WaveSwipActivity"></activity>
     </application>
 
 </manifest>
