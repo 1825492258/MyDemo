@@ -91,8 +91,8 @@ public class BasicUsingActivity extends BaseActivity {
                 }, 1500);
             }
         });
-        refreshLayout.setRefreshHeader(new ClassicsHeader(this));
-        refreshLayout.setHeaderHeight(60);
+       // refreshLayout.setRefreshHeader(new ClassicsHeader(this));
+       // refreshLayout.setHeaderHeight(60);
         // 触发自动刷新
         refreshLayout.autoRefresh();
     }
