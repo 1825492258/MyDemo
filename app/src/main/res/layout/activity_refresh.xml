@@ -26,6 +26,10 @@
             android:layout_height="wrap_content"
             android:text="基本使用" />
 
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:id="@+id/refresh_layout"
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
 </com.scwang.smartrefresh.layout.SmartRefreshLayout>

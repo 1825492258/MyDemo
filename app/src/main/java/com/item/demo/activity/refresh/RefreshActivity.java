@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 
 import com.item.demo.R;
 import com.item.demo.activity.base.BaseActivity;
+import com.scwang.smartrefresh.layout.internal.ProgressDrawable;
 
 public class RefreshActivity extends BaseActivity implements View.OnClickListener {
 
@@ -23,6 +25,9 @@ public class RefreshActivity extends BaseActivity implements View.OnClickListene
         btnTwo = (Button) findViewById(R.id.btn_text_two);
         btnOne.setOnClickListener(this);
         btnTwo.setOnClickListener(this);
+
+
+
     }
 
     @Override
