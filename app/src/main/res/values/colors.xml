@@ -7,4 +7,7 @@
     <color name="bg">#F0F0F0</color>
     <color name="clickspan_color">#00ddb6</color>
     <color name="colorTextAssistant">#888888</color>
+    <color name="bg_white">#f1f1f1f1</color>
+    <color name="color_text_normal">#333333</color>
+    <color name="color_price">#a0ff1111</color>
 </resources>

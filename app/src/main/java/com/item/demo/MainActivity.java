@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.item.demo.activity.map.MyMapActivity;
 import com.item.demo.activity.recycler.PullToRefreshUseActivity;
 import com.item.demo.activity.recycler.TestOneActivity;
 import com.item.demo.activity.recycler.adapter.HomeAdapter;
@@ -28,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         PushAgent.getInstance(this).onAppStart(); // 统计应用启动数据
-        Log.d("jiejie","main create");
+        Log.d("jiejie", "main create");
         Button btn = (Button) findViewById(R.id.btn_one);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,6 +43,12 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 startActivity(new Intent(MainActivity.this, RefreshActivity.class));
+            }
+        });
+        findViewById(R.id.btn_three).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, MyMapActivity.class));
             }
         });
     }
