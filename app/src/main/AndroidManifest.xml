@@ -2,7 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.item.demo">
 
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
     <application
+        android:name=".application.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -21,7 +24,20 @@
         <activity android:name=".activity.refresh.TextRefreshActivity" />
         <activity android:name=".activity.refresh.BasicUsingActivity" />
         <activity android:name=".activity.refresh.RefreshActivity" />
-        <activity android:name=".activity.refresh.WaveSwipActivity"></activity>
+
+        <service android:name=".push.MyPushIntentService" />
+
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="59f2c459f43e4803c900032d" />
+        <meta-data
+            android:name="UMENG_MESSAGE_SECRET"
+            android:value=" 558702fcd955a9b66d402314cb4b0522" />
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="MyDemo" />
+
+        <activity android:name=".test.TestActivity"></activity>
     </application>
 
 </manifest>

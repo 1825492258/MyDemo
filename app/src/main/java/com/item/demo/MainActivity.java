@@ -17,6 +17,7 @@ import com.item.demo.activity.recycler.adapter.HomeAdapter;
 import com.item.demo.activity.refresh.BasicUsingActivity;
 import com.item.demo.activity.refresh.RefreshActivity;
 import com.item.demo.activity.refresh.TextRefreshActivity;
+import com.umeng.message.PushAgent;
 
 import java.util.ArrayList;
 
@@ -26,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        PushAgent.getInstance(this).onAppStart(); // 统计应用启动数据
+        Log.d("jiejie","main create");
         Button btn = (Button) findViewById(R.id.btn_one);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
