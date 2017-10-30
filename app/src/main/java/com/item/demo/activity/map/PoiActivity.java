@@ -7,11 +7,13 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.item.demo.R;
+import com.item.demo.adapter.PoiAdapter;
 import com.item.demo.lbs.ILbsLayer;
 import com.item.demo.lbs.LocationInfo;
 import com.item.demo.lbs.MapLbsLayerImpl;
@@ -31,9 +33,10 @@ public class PoiActivity extends AppCompatActivity {
     EditText edtSearch; // 搜索的内容
     @BindView(R.id.lv_search)
     ListView mListView; // ListView控件
+    private PoiAdapter mAdapter; // 适配器
     private ILbsLayer mLbsLayer;
-    private LocationInfo info; //
     private List<LocationInfo> mData;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,14 +47,14 @@ public class PoiActivity extends AppCompatActivity {
 
     private void initData() {
         Intent intent = getIntent();
-        info = (LocationInfo)intent.getSerializableExtra("position");
+        LocationInfo info = (LocationInfo) intent.getSerializableExtra("position");
         mLbsLayer = new MapLbsLayerImpl(this);
-        if(info!=null){
+        if (info != null) {
             mLbsLayer.poiBoundSearch(info, new ILbsLayer.OnSearchedListener() {
                 @Override
                 public void onSearched(List<LocationInfo> results) {
                     mData = results;
-
+                    updatePoiList(results);
                 }
             });
         }
@@ -68,7 +71,7 @@ public class PoiActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if(!TextUtils.isEmpty(editable.toString().trim())){
+                if (!TextUtils.isEmpty(editable.toString().trim())) {
                     // 关键字搜索推荐地点
                     mLbsLayer.poiSearch(editable.toString().trim(), new ILbsLayer.OnSearchedListener() {
                         @Override
@@ -76,8 +79,8 @@ public class PoiActivity extends AppCompatActivity {
                             updatePoiList(results);
                         }
                     });
-                }else {
-
+                } else {
+                    if (mAdapter != null) mAdapter.setData(mData);
                 }
             }
         });
@@ -85,12 +88,34 @@ public class PoiActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finish();
-                PoiActivity.this.overridePendingTransition(0,R.anim.slide_out_down);
+                PoiActivity.this.overridePendingTransition(0, R.anim.slide_out_down);
             }
         });
     }
 
     private void updatePoiList(List<LocationInfo> results) {
+        if (mAdapter == null) {
+            mAdapter = new PoiAdapter(getApplicationContext(), results);
+            mListView.setAdapter(mAdapter);
+        } else {
+            mAdapter.setData(results);
+        }
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                LocationInfo info = (LocationInfo) mAdapter.getItem(i);
+                Intent intent = new Intent();
+                intent.putExtra("data", info);
+                setResult(2, intent);
+                finish();
+                PoiActivity.this.overridePendingTransition(0, R.anim.slide_out_down);
+            }
+        });
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        this.overridePendingTransition(0, R.anim.slide_out_down);
+    }
 }

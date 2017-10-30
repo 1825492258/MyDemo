@@ -56,7 +56,8 @@
             android:value="227b523130425487380e95832d25263d" />
 
         <activity android:name=".activity.map.MyMapActivity" />
-        <activity android:name=".activity.map.PoiActivity"></activity>
+        <activity android:name=".activity.map.PoiActivity" />
+        <activity android:name=".activity.http.HttpOneActivity"></activity>
     </application>
 
 </manifest>
