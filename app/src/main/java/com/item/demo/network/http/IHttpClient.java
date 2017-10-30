@@ -15,7 +15,7 @@ public interface IHttpClient {
      * @param forceCache 是否缓存
      * @return IResponse（状态码及数据体）
      */
-    IResponse get(IRequest request, boolean forceCache);
+    // IResponse get(IRequest request, boolean forceCache);
 
     /**
      * 对外提供POST请求方式
@@ -24,12 +24,33 @@ public interface IHttpClient {
      * @param forceCache 是否缓存
      * @return IResponse（状态码及数据体）
      */
-    IResponse post(IRequest request, boolean forceCache);
+    // IResponse post(IRequest request, boolean forceCache);
 
-    void myGet(IRequest request,boolean forceCache,MyCallBack callBack);
+    /**
+     * 对外提供GET请求方式
+     *
+     * @param request    请求体
+     * @param forceCache 是否缓存
+     * @param callBack   回调函数
+     */
+    void get(IRequest request, boolean forceCache, RequestCallBack callBack);
 
-    interface MyCallBack{
-        void onMyCallBack(BaseResponse response);
-        void onMyFial(int code);
+    /**
+     * 对外提供POST请求方式
+     *
+     * @param request    请求体
+     * @param forceCache 是否缓存
+     * @param callBack   回调函数
+     */
+    void post(IRequest request, boolean forceCache, RequestCallBack callBack);
+
+    /**
+     * 网络请求的回调
+     */
+    interface RequestCallBack {
+
+        void onSuccess(BaseResponse response); // 成功返回状态码及数据体
+
+        void onFailure(int code); // 失败这里只返回状态码
     }
 }

@@ -20,6 +20,10 @@ public class HttpConstants {
      * get
      * http://192.168.3.20:8083/smarttransport-bms/login-consumer?phoneNumber=18356025758&verificationCode=9009
      */
-    public final static String LOGIN_CONSUMER_URL = SERVER_URL + "login-consumer?phoneNumber=${phoneNumber}&verificationCode=${verificationCode}";
-    public  final static String JJ = "http://cloud.bmob.cn/f34e28da5816433d/getMsgCode?phone=${phone}";
+    public final static String LOGIN_CONSUMER_URL = SERVER_URL + "login-consumer?phoneNumber={phoneNumber}&verificationCode={verificationCode}";
+
+    public final static String PAY_URL = "http://192.168.3.20:8083/smarttransport-bms/alipay-sign";
+    public  final static String JJ = "http://cloud.bmob.cn/f34e28da5816433d/getMsgCode?phone={phone}";
+
+    public final static String MY_WALLET_URL = SERVER_URL + "my-wallet";
 }

@@ -51,13 +51,13 @@ public class MyPushIntentService extends UmengMessageService {
                 // 完全自定义消息的忽略统计
                 UTrack.getInstance(getApplicationContext()).trackMsgDismissed(msg);
             }
-            if(isRunningForeground(this)){
+            if (isRunningForeground(this)) {
                 Intent intent1 = new Intent();
 //                intent1.setClass(context, TestActivity.class);
 //                intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 showNotifications(context, msg, intent1);
             }
-             Log.d("jiejie","-------" + isRunningForeground(this));
+            Log.d("jiejie", "-------" + isRunningForeground(this));
 
 
         } catch (Exception e) {
@@ -90,7 +90,7 @@ public class MyPushIntentService extends UmengMessageService {
     private boolean isRunningForeground(Context context) {
         ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         List<ActivityManager.RunningAppProcessInfo> appProcesses = activityManager.getRunningAppProcesses();
-        if(appProcesses == null) return false;
+        if (appProcesses == null) return false;
         for (ActivityManager.RunningAppProcessInfo appProcess : appProcesses) {
             if (appProcess.processName.equals(context.getPackageName())) {
                 if (appProcess.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_BACKGROUND) {

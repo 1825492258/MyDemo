@@ -16,4 +16,16 @@ public class MSMcode extends BaseBizResponse {
     public void setData(Verification data) {
         this.data = data;
     }
+
+    public static class Verification {
+        private String verificationCode;
+
+        public String getVerificationCode() {
+            return verificationCode;
+        }
+
+        public void setVerificationCode(String verificationCode) {
+            this.verificationCode = verificationCode;
+        }
+    }
 }

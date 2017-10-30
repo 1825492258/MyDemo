@@ -11,13 +11,25 @@
         android:id="@+id/btn_http_one"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="发送验证码" />
+        android:text="测试发送验证码" />
 
     <Button
         android:id="@+id/btn_http_two"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="登录" />
+        android:text="测试登录" />
+
+    <Button
+        android:id="@+id/btn_http_four"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="测试POST请求" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:id="@+id/btn_http_five"
+        android:text="获取我的钱包"
+        android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/btn_http_three"

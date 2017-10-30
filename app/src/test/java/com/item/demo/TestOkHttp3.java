@@ -2,10 +2,14 @@ package com.item.demo;
 
 import org.junit.Test;
 
+import java.io.File;
 import java.io.IOException;
 
+import okhttp3.Cache;
+import okhttp3.CacheControl;
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -85,6 +89,68 @@ public class TestOkHttp3 {
         try {
             Response response = call.execute();
             System.out.println("Post response" + response.code() + "   " + response.body().string());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @Test
+    public void testInterceptor(){
+        // 定义拦截器
+        Interceptor interceptor = new Interceptor() {
+            @Override
+            public Response intercept(Chain chain) throws IOException {
+                long start = System.currentTimeMillis();
+                Request request = chain.request();
+                Response response = chain.proceed(request);
+                long end = System.currentTimeMillis();
+                System.out.println("interceptor: cost time = " + (end -start));
+                return response;
+            }
+        };
+        // 创建OkHttpClient 对象
+        OkHttpClient client = new OkHttpClient.Builder()
+                .addInterceptor(interceptor)
+                .build();
+        // 创建Request 对象
+        Request request = new Request.Builder()
+                .url("http://httpbin.org/get?id=id")
+                .build();
+        // OkHttpClient 执行Request
+        try {
+            Response response = client.newCall(request).execute();
+            System.out.print("response:" + response.body().string());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @Test
+    public void testCache(){
+        // 创建缓存对象
+        Cache cache = new Cache(new File("cache.chache"),1024*1024);
+        // 创建OKHttpClient 对象
+        OkHttpClient client = new OkHttpClient.Builder()
+                .cache(cache)
+                .build();
+        // 创建Request对象
+        Request request = new Request.Builder()
+                .url("http://httpbin.org/get?id=id")
+                //.cacheControl(CacheControl.FORCE_NETWORK)
+                .cacheControl(CacheControl.FORCE_CACHE)
+                .build();
+        // OKHttpClient 执行Request
+        try {
+            Response response = client.newCall(request).execute();
+            Response responseCache = response.cacheResponse();
+            Response responseNet = response.networkResponse();
+            if(responseCache !=null){
+                // 从缓存响应
+                System.out.println("response from cache");
+            }
+            if (responseNet != null){
+                // 从网络响应
+                System.out.println("response from net");
+            }
+            System.out.println("response:--" + response.body().string());
         } catch (IOException e) {
             e.printStackTrace();
         }

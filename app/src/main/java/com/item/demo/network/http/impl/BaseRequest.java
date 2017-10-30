@@ -50,7 +50,7 @@ public class BaseRequest implements IRequest {
         if ("GET".equals(method)) {
             // 组装GET请求参数
             for (String key : body.keySet()) {
-                url = url.replace("${" + key + "}", body.get(key).toString());
+                url = url.replace("{" + key + "}", body.get(key).toString());
             }
         }
         Log.d("jiejie", "请求地址--" + method + "   " + url);
@@ -65,6 +65,7 @@ public class BaseRequest implements IRequest {
     @Override
     public Object getBody() {
         if (body != null) {
+            Log.d("jiejie","body" +new Gson().toJson(this.body, HashMap.class));
             return new Gson().toJson(this.body, HashMap.class);
         } else {
             return "{}";

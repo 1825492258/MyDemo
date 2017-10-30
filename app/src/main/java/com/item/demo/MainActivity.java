@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.item.demo.activity.http.HttpOneActivity;
@@ -66,15 +67,16 @@ public class MainActivity extends AppCompatActivity {
      */
     private void fetchSMSCode(String phone) {
         IRequest request = new BaseRequest(HttpConstants.VERIFICATION_CODE_URL + phone);
-        OKHttpClientImp.getInstance(this).myGet(request, false, new IHttpClient.MyCallBack() {
+        OKHttpClientImp.getInstance().get(request, false, new IHttpClient.RequestCallBack() {
             @Override
-            public void onMyCallBack(BaseResponse response) {
+            public void onSuccess(BaseResponse response) {
                 Log.d("jiejie", response.getCode() + "   " + response.getData());
+                Toast.makeText(MainActivity.this, "" + response.getCode(), Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onMyFial(int code) {
-                Log.d("jiejie", "shibai" + code);
+            public void onFailure(int code) {
+
             }
         });
     }
