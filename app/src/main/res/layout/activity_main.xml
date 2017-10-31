@@ -41,6 +41,12 @@
             android:id="@+id/btn_four"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="调用相机" />
+            android:text="使用系统更换头像" />
+
+        <Button
+            android:id="@+id/btn_five"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="使用第三方的更换头像" />
     </LinearLayout>
 </com.scwang.smartrefresh.layout.SmartRefreshLayout>

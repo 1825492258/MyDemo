@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context="com.item.demo.activity.http.PhotoTwoActivity">
+    <Button
+        android:layout_width="match_parent"
+        android:id="@+id/btn_photo_take"
+        android:layout_height="wrap_content" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/img_photo"
+        android:layout_width="@dimen/len_138"
+        android:layout_height="@dimen/len_138"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/len_25"
+        android:src="@drawable/image_weibo_home_2"
+        app:civ_border_color="@color/bg_white"
+        app:civ_border_width="@dimen/len_2" />
+</LinearLayout>

@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.item.demo.activity.http.HttpOneActivity;
 import com.item.demo.activity.http.PhotoActivity;
+import com.item.demo.activity.http.PhotoTwoActivity;
 import com.item.demo.activity.map.MyMapActivity;
 import com.item.demo.activity.recycler.PullToRefreshUseActivity;
 import com.item.demo.activity.recycler.TestOneActivity;
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // 到TestOne
                 startActivity(new Intent(MainActivity.this, TestOneActivity.class));
             }
         });
@@ -50,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         btnTwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                // Refresh
                 startActivity(new Intent(MainActivity.this, RefreshActivity.class));
             }
         });
@@ -64,7 +66,15 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btn_four).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // 调用系统更换头像
                 startActivity(new Intent(MainActivity.this, PhotoActivity.class));
+            }
+        });
+        findViewById(R.id.btn_five).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // 使用框架更换头像
+                startActivity(new Intent(MainActivity.this, PhotoTwoActivity.class));
             }
         });
     }
