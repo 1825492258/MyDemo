@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.item.demo.activity.http.HttpOneActivity;
+import com.item.demo.activity.http.PhotoActivity;
 import com.item.demo.activity.map.MyMapActivity;
 import com.item.demo.activity.recycler.PullToRefreshUseActivity;
 import com.item.demo.activity.recycler.TestOneActivity;
@@ -58,6 +59,12 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 fetchSMSCode("12121212");
                 startActivity(new Intent(MainActivity.this, HttpOneActivity.class));
+            }
+        });
+        findViewById(R.id.btn_four).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, PhotoActivity.class));
             }
         });
     }

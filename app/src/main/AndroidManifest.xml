@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.item.demo">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <!-- 允许程序打开网络套接字 -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -55,9 +58,20 @@
             android:name="com.amap.api.v2.apikey"
             android:value="227b523130425487380e95832d25263d" />
 
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.item.demo.fileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
         <activity android:name=".activity.map.MyMapActivity" />
         <activity android:name=".activity.map.PoiActivity" />
-        <activity android:name=".activity.http.HttpOneActivity"></activity>
+        <activity android:name=".activity.http.HttpOneActivity" />
+        <activity android:name=".activity.http.PhotoActivity" />
     </application>
 
 </manifest>
