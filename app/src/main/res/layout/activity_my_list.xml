@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#278FDC"
+        android:gravity="center"
+        android:paddingTop="20dp"
+        android:text="个人中心"
+        android:textSize="20sp" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/lv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:cacheColorHint="@color/transparent"
+            android:divider="@color/transparent"
+            android:fadingEdge="none"
+            android:fadingEdgeLength="0dp"
+            android:footerDividersEnabled="false"
+            android:headerDividersEnabled="false"
+            android:listSelector="@color/transparent" />
+
+        <LinearLayout
+            android:id="@+id/ll_top"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="#278FDC"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/app_name"
+                android:textSize="15sp" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#eee" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/app_name"
+                android:textSize="15sp" />
+        </LinearLayout>
+    </FrameLayout>
+</LinearLayout>

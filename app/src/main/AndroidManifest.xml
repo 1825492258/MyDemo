@@ -72,7 +72,8 @@
         <activity android:name=".activity.map.PoiActivity" />
         <activity android:name=".activity.http.HttpOneActivity" />
         <activity android:name=".activity.http.PhotoActivity" />
-        <activity android:name=".activity.http.PhotoTwoActivity"></activity>
+        <activity android:name=".activity.http.PhotoTwoActivity" />
+        <activity android:name=".activity.refresh.MyListActivity"></activity>
     </application>
 
 </manifest>

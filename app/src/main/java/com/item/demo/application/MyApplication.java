@@ -19,6 +19,7 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
         mApplication = this;
         PushAgent mPushAgent = PushAgent.getInstance(this);
         // sdk 开启通知声音

@@ -40,6 +40,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile project(':PushSDK')
+
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.32'
@@ -50,7 +51,6 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.1'
     compile 'com.jakewharton:butterknife:8.8.1'
     compile 'com.squareup.okhttp3:okhttp:3.9.0'
-
     compile 'com.github.LuckSiege.PictureSelector:picture_library:v2.1.5'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'

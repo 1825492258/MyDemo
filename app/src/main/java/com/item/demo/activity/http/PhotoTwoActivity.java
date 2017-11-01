@@ -5,10 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
 import com.item.demo.R;
 import com.luck.picture.lib.PictureSelector;
@@ -84,7 +83,7 @@ public class PhotoTwoActivity extends AppCompatActivity {
                             .centerCrop()
                             .placeholder(R.color.color_price)
                             .diskCacheStrategy(DiskCacheStrategy.ALL);
-                    Glide.with(this).load(path).apply(options).into(imgView);
+                    Glide.with(this).load(path).transition(new DrawableTransitionOptions().crossFade(500)).apply(options).into(imgView);
                     break;
             }
         }

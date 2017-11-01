@@ -29,6 +29,7 @@
         <Button
             android:id="@+id/btn_two"
             android:layout_width="match_parent"
+            android:text="ListView"
             android:layout_height="wrap_content" />
 
         <Button

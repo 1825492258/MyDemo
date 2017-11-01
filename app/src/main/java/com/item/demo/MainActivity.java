@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         btnTwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Refresh
+                // RefreshView
                 startActivity(new Intent(MainActivity.this, RefreshActivity.class));
             }
         });
