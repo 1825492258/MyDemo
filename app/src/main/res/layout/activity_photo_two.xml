@@ -3,12 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.item.demo.activity.http.PhotoTwoActivity">
+
     <Button
-        android:layout_width="match_parent"
         android:id="@+id/btn_photo_take"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -20,4 +21,15 @@
         android:src="@drawable/image_weibo_home_2"
         app:civ_border_color="@color/bg_white"
         app:civ_border_width="@dimen/len_2" />
+
+    <Button
+        android:id="@+id/btn_photo_push"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="想主界面发送一个消息" />
+    <Button
+        android:layout_width="match_parent"
+        android:id="@+id/btn_photo_test"
+        android:text="测试"
+        android:layout_height="wrap_content" />
 </LinearLayout>

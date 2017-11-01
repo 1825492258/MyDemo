@@ -22,12 +22,16 @@ import com.item.demo.activity.recycler.adapter.HomeAdapter;
 import com.item.demo.activity.refresh.BasicUsingActivity;
 import com.item.demo.activity.refresh.RefreshActivity;
 import com.item.demo.activity.refresh.TextRefreshActivity;
+import com.item.demo.entity.TestBean;
 import com.item.demo.network.http.IHttpClient;
 import com.item.demo.network.http.IRequest;
 import com.item.demo.network.http.impl.BaseRequest;
 import com.item.demo.network.http.impl.BaseResponse;
 import com.item.demo.network.http.impl.OKHttpClientImp;
 import com.item.demo.utils.HttpConstants;
+import com.item.demo.utils.ToastUtils;
+import com.item.demo.utils.databus.RegisterBus;
+import com.item.demo.utils.databus.RxBus;
 import com.umeng.message.PushAgent;
 
 import java.util.ArrayList;
@@ -38,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        RxBus.getInstance().register(this);
         PushAgent.getInstance(this).onAppStart(); // 统计应用启动数据
         Log.d("jiejie", "main create");
         Button btn = (Button) findViewById(R.id.btn_one);
@@ -96,5 +101,17 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+    @RegisterBus
+    public void onPush(TestBean bean){
+        Log.d("jiejie","接受到的信息 ： " +bean );
+        ToastUtils.showToast(bean.getMsg());
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        com.luck.picture.lib.rxbus2.RxBus.getDefault().register(this);
+        RxBus.getInstance().unRegister(this);
     }
 }
