@@ -29,14 +29,14 @@
         <Button
             android:id="@+id/btn_two"
             android:layout_width="match_parent"
-            android:text="ListView"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="ListView" />
 
         <Button
             android:id="@+id/btn_three"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="高德地图" />
+            android:text="测试网络请求" />
 
         <Button
             android:id="@+id/btn_four"
@@ -53,8 +53,20 @@
         <Button
             android:id="@+id/btn_six"
             android:layout_width="match_parent"
-            android:textColor="@color/bar_grey"
+            android:layout_height="wrap_content"
             android:text="测试视频"
-            android:layout_height="wrap_content" />
+            android:textColor="@color/bar_grey" />
+
+        <Button
+            android:id="@+id/btn_seven"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="测试高德地图封装" />
+
+        <Button
+            android:id="@+id/btn_eight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="测试高德地图" />
     </LinearLayout>
 </com.scwang.smartrefresh.layout.SmartRefreshLayout>

@@ -52,6 +52,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.btn_four).setOnClickListener(this);
         findViewById(R.id.btn_five).setOnClickListener(this);
         findViewById(R.id.btn_six).setOnClickListener(this);
+        findViewById(R.id.btn_seven).setOnClickListener(this);
+        findViewById(R.id.btn_eight).setOnClickListener(this);
     }
 
     /**
@@ -95,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_two://RefreshView
                 startActivity(new Intent(MainActivity.this, RefreshActivity.class));
                 break;
-            case R.id.btn_three:
+            case R.id.btn_three: // 测试网络请求
                 fetchSMSCode("12121212");
                 startActivity(new Intent(MainActivity.this, HttpOneActivity.class));
                 break;
@@ -111,7 +113,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 // 测试视频
                 startActivity(new Intent(this, TestTwoActivity.class));
                 break;
+            case R.id.btn_seven: // 测试高德地图的封装
+                startActivity(new Intent(this,MyMapActivity.class));
+                break;
+            case R.id.btn_eight: // 测试高德地图
 
+                break;
         }
     }
 }
