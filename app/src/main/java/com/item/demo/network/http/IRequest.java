@@ -24,7 +24,7 @@ public interface IRequest {
      * @param key
      * @param value
      */
-    void setBody(String key, String value);
+    void setBody(String key, Object value);
 
     /**
      * 提供给执行库请求行URL

@@ -49,5 +49,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="使用第三方的更换头像" />
+
+        <Button
+            android:id="@+id/btn_six"
+            android:layout_width="match_parent"
+            android:textColor="@color/bar_grey"
+            android:text="测试视频"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 </com.scwang.smartrefresh.layout.SmartRefreshLayout>

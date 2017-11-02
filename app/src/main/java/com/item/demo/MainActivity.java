@@ -28,6 +28,7 @@ import com.item.demo.network.http.IRequest;
 import com.item.demo.network.http.impl.BaseRequest;
 import com.item.demo.network.http.impl.BaseResponse;
 import com.item.demo.network.http.impl.OKHttpClientImp;
+import com.item.demo.test.TestTwoActivity;
 import com.item.demo.utils.HttpConstants;
 import com.item.demo.utils.ToastUtils;
 import com.item.demo.utils.databus.RegisterBus;
@@ -36,7 +37,7 @@ import com.umeng.message.PushAgent;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,43 +46,12 @@ public class MainActivity extends AppCompatActivity {
         RxBus.getInstance().register(this);
         PushAgent.getInstance(this).onAppStart(); // 统计应用启动数据
         Log.d("jiejie", "main create");
-        Button btn = (Button) findViewById(R.id.btn_one);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // 到TestOne
-                startActivity(new Intent(MainActivity.this, TestOneActivity.class));
-            }
-        });
-        Button btnTwo = (Button) findViewById(R.id.btn_two);
-        btnTwo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // RefreshView
-                startActivity(new Intent(MainActivity.this, RefreshActivity.class));
-            }
-        });
-        findViewById(R.id.btn_three).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                fetchSMSCode("12121212");
-                startActivity(new Intent(MainActivity.this, HttpOneActivity.class));
-            }
-        });
-        findViewById(R.id.btn_four).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // 调用系统更换头像
-                startActivity(new Intent(MainActivity.this, PhotoActivity.class));
-            }
-        });
-        findViewById(R.id.btn_five).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // 使用框架更换头像
-                startActivity(new Intent(MainActivity.this, PhotoTwoActivity.class));
-            }
-        });
+        findViewById(R.id.btn_one).setOnClickListener(this);
+        findViewById(R.id.btn_two).setOnClickListener(this);
+        findViewById(R.id.btn_three).setOnClickListener(this);
+        findViewById(R.id.btn_four).setOnClickListener(this);
+        findViewById(R.id.btn_five).setOnClickListener(this);
+        findViewById(R.id.btn_six).setOnClickListener(this);
     }
 
     /**
@@ -113,5 +83,35 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         com.luck.picture.lib.rxbus2.RxBus.getDefault().register(this);
         RxBus.getInstance().unRegister(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.btn_one:
+                // 到TestOne
+                startActivity(new Intent(MainActivity.this, TestOneActivity.class));
+                break;
+            case R.id.btn_two://RefreshView
+                startActivity(new Intent(MainActivity.this, RefreshActivity.class));
+                break;
+            case R.id.btn_three:
+                fetchSMSCode("12121212");
+                startActivity(new Intent(MainActivity.this, HttpOneActivity.class));
+                break;
+            case R.id.btn_four:
+                // 调用系统更换头像
+                startActivity(new Intent(MainActivity.this, PhotoActivity.class));
+                break;
+            case R.id.btn_five:
+                // 使用框架更换头像
+                startActivity(new Intent(MainActivity.this, PhotoTwoActivity.class));
+                break;
+            case R.id.btn_six:
+                // 测试视频
+                startActivity(new Intent(this, TestTwoActivity.class));
+                break;
+
+        }
     }
 }

@@ -41,7 +41,7 @@ public class BaseRequest implements IRequest {
     }
 
     @Override
-    public void setBody(String key, String value) {
+    public void setBody(String key, Object value) {
         body.put(key, value);
     }
 
