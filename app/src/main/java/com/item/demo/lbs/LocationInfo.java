@@ -4,16 +4,34 @@ import java.io.Serializable;
 
 /**
  * Created by wuzongjie on 2017/10/27.
- * 定位，搜索的实体类
+ * 定位信息：实体类
  */
 
 public class LocationInfo implements Serializable {
-    private String key;
-    private String name;
-    private double latitude;
-    private double longitude;
-    private float rotation;
-    private String district;
+    private String key; // 唯一值
+    private String name; // 地址名称
+    private double latitude; // 精度
+    private double longitude; // 维度
+    private float rotation; // 角度
+    private String district; // 详细地址
+
+    public LocationInfo(double latitude, double longitude) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
+    public LocationInfo(String key, double latitude, double longitude) {
+        this.key = key;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
+    public LocationInfo(String key, double latitude, double longitude, float rotation) {
+        this.key = key;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.rotation = rotation;
+    }
 
     public String getDistrict() {
         return district;
@@ -23,10 +41,6 @@ public class LocationInfo implements Serializable {
         this.district = district;
     }
 
-    public LocationInfo (double latitude, double longitude){
-        this.latitude = latitude;
-        this.longitude = longitude;
-    }
 
     public String getKey() {
         return key;

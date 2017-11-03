@@ -46,22 +46,51 @@ public interface ILbsLayer {
     String getCity();
 
     /**
+     * 计算2点间直线距离
+     * @param locationInfo1 第一个点
+     * @param locationInfo2 第二个点
+     * @return
+     */
+    float getTwoDistance(LocationInfo locationInfo1,LocationInfo locationInfo2);
+    /**
      * 添加更新标记点，包括位置，角度
      */
     void addOnUpdateMarker(LocationInfo locationInfo, Bitmap bitmap);
+
+    void addOnMydateMarker(LocationInfo locationInfo,Bitmap bitmap);
+
+    /**
+     * 地图加载完成
+     * @param done 回调
+     */
+    void onMapLoaded(OnMapLoadDone done);
+
     /**
      * 搜索 输入内容自动提示
-     * @param key 搜索地名
+     *
+     * @param key      搜索地名
      * @param listener 监听
      */
     void poiSearch(String key, OnSearchedListener listener);
 
     /**
      * 搜索附近信息
+     *
      * @param info
      * @param listener
      */
     void poiBoundSearch(LocationInfo info, OnSearchedListener listener);
+
+    /**
+     * 绘制2点之间行车路径
+     *
+     * @param start    开始
+     * @param end      结束
+     * @param color    颜色
+     * @param listener 返回的监听
+     */
+    void driverRoute(LocationInfo start, LocationInfo end, int color, OnRouteCompleteListener listener);
+
     /**
      * 生命周期函数
      */
@@ -78,6 +107,8 @@ public interface ILbsLayer {
     // 清除地图所有marker
     void clearAllMarkers();
 
+    void onMapChange(OnMapChangeListener listener);
+
     interface CommonLocationChangeListener {
         void onLocationChanged(LocationInfo locationInfo);
 
@@ -91,5 +122,28 @@ public interface ILbsLayer {
         void onSearched(List<LocationInfo> results);
 
         // void onError(int rCode);
+    }
+
+    /**
+     * 路径规划完成监听
+     * Created by liuguangli on 17/3/24.
+     */
+    interface OnRouteCompleteListener {
+        void onComplete(RouteInfo result);
+    }
+
+    /**
+     * 地图加载完成
+     */
+    interface OnMapLoadDone{
+        void onMapDone();
+    }
+
+    /**
+     * 地图中心点改变
+     */
+    interface OnMapChangeListener{
+        void onChangeFinish(LocationInfo result);
+        void onChange();
     }
 }

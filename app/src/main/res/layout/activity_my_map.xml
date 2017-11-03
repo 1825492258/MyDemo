@@ -93,10 +93,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="是打发打发"
+            android:text="信息信息信息信息信息"
             android:textColor="@color/color_text_normal"
             android:textSize="14sp"
-            android:visibility="gone"
+            android:visibility="visible"
             tools:visibility="visible" />
 
 

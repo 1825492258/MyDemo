@@ -57,6 +57,7 @@
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="227b523130425487380e95832d25263d" />
+        <service android:name="com.amap.api.location.APSService"/>
 
         <provider
             android:name="android.support.v4.content.FileProvider"

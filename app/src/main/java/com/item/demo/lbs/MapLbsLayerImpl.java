@@ -2,6 +2,7 @@ package com.item.demo.lbs;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +12,7 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.amap.api.maps.AMap;
+import com.amap.api.maps.AMapUtils;
 import com.amap.api.maps.CameraUpdate;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.LocationSource;
@@ -22,6 +24,7 @@ import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.LatLngBounds;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
+import com.amap.api.maps.model.PolylineOptions;
 import com.amap.api.services.core.AMapException;
 import com.amap.api.services.core.LatLonPoint;
 import com.amap.api.services.core.PoiItem;
@@ -30,6 +33,13 @@ import com.amap.api.services.help.InputtipsQuery;
 import com.amap.api.services.help.Tip;
 import com.amap.api.services.poisearch.PoiResult;
 import com.amap.api.services.poisearch.PoiSearch;
+import com.amap.api.services.route.BusRouteResult;
+import com.amap.api.services.route.DrivePath;
+import com.amap.api.services.route.DriveRouteResult;
+import com.amap.api.services.route.DriveStep;
+import com.amap.api.services.route.RideRouteResult;
+import com.amap.api.services.route.RouteSearch;
+import com.amap.api.services.route.WalkRouteResult;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -58,6 +68,9 @@ public class MapLbsLayerImpl implements ILbsLayer {
     private String mCity;
     // 管理地图标记的集合
     private Map<String, Marker> markerMap = new HashMap<>();
+    private RouteSearch mRouteSearch;
+    private OnMapLoadDone done; // 加载完成的回调
+    private OnMapChangeListener changeListener; // 地图中心点改变的监听
 
     public MapLbsLayerImpl(Context context) {
         this.mContext = context;
@@ -65,6 +78,37 @@ public class MapLbsLayerImpl implements ILbsLayer {
         mapView = new MapView(mContext);
         // 获取地图管理器
         aMap = mapView.getMap();
+        aMap.setOnMapLoadedListener(new AMap.OnMapLoadedListener() {
+            @Override
+            public void onMapLoaded() {
+                if (done != null) {
+                    done.onMapDone();
+                }
+            }
+        });
+        // 移动地图中心点
+        aMap.setOnCameraChangeListener(new AMap.OnCameraChangeListener() {
+            @Override
+            public void onCameraChange(CameraPosition cameraPosition) {
+                if (changeListener != null) {
+                    changeListener.onChange();
+                }
+            }
+
+            @Override
+            public void onCameraChangeFinish(CameraPosition cameraPosition) {
+                if (changeListener != null) {
+                    changeListener.onChangeFinish(new LocationInfo("0000", cameraPosition.target.latitude,
+                            cameraPosition.target.longitude));
+                }
+            }
+        });
+        aMap.setOnMarkerClickListener(new AMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                return true;
+            }
+        });
     }
 
     /**
@@ -75,12 +119,29 @@ public class MapLbsLayerImpl implements ILbsLayer {
         return mapView;
     }
 
+    @Override
+    public float getTwoDistance(LocationInfo locationInfo1, LocationInfo locationInfo2) {
+        LatLng latLng1 = new LatLng(locationInfo1.getLatitude(), locationInfo1.getLongitude());
+        LatLng latLng2 = new LatLng(locationInfo2.getLatitude(), locationInfo2.getLongitude());
+        return AMapUtils.calculateLineDistance(latLng1, latLng2);
+    }
+
     /**
      * 获取当前城市
      */
     @Override
     public String getCity() {
         return mCity;
+    }
+
+    @Override
+    public void onMapLoaded(OnMapLoadDone done) {
+        this.done = done;
+    }
+
+    @Override
+    public void onMapChange(OnMapChangeListener listener) {
+        this.changeListener = listener;
     }
 
     /**
@@ -95,8 +156,8 @@ public class MapLbsLayerImpl implements ILbsLayer {
             mLocationOption = new AMapLocationClientOption();
             // 设置为高精度定位模式
             mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
-            mLocationOption.setInterval(6000);
-            // mLocationOption.setOnceLocation(true); // 单次定位
+            // mLocationOption.setInterval(6000);
+            mLocationOption.setOnceLocation(true); // 单次定位
             mLocationClient.setLocationOption(mLocationOption); // 设置定位参数
         }
         setUpMap();
@@ -134,7 +195,7 @@ public class MapLbsLayerImpl implements ILbsLayer {
         mLocationClient.setLocationListener(new AMapLocationListener() {
             @Override
             public void onLocationChanged(AMapLocation aMapLocation) {
-                Log.d(TAG, "定位--------" + aMapLocation.getLatitude());
+                Log.d(TAG, "定位--------" + aMapLocation.getLatitude() + "   " + aMapLocation.getErrorCode());
                 // 定位变化位置
                 if (mMapLocationChangeListener != null) {
                     // 当前城市
@@ -238,9 +299,11 @@ public class MapLbsLayerImpl implements ILbsLayer {
         if (storedMarker != null) {
             // 如果已经存在则更新角度，位置
             storedMarker.setPosition(latLng);
+            Log.d("jiejie", locationInfo.getKey() + "----已存在");
             storedMarker.setRotateAngle(locationInfo.getRotation());
         } else {
             // 如果不存在则创建
+            Log.d("jiejie", locationInfo.getKey() + "----不存在");
             MarkerOptions options = new MarkerOptions();
             BitmapDescriptor des = BitmapDescriptorFactory.fromBitmap(bitmap);
             options.icon(des);
@@ -250,6 +313,124 @@ public class MapLbsLayerImpl implements ILbsLayer {
             marker.setRotateAngle(locationInfo.getRotation());
             markerMap.put(locationInfo.getKey(), marker);
         }
+    }
+
+    @Override
+    public void addOnMydateMarker(LocationInfo locationInfo, Bitmap bitmap) {
+        Marker storeMarker = markerMap.get(locationInfo.getKey());
+        LatLng latLng = new LatLng(locationInfo.getLatitude(), locationInfo.getLongitude());
+        if (storeMarker != null) {
+            // 如果已经存在就更换角度位置
+            Point screenPosition = aMap.getProjection().toScreenLocation(latLng);
+            storeMarker.setPosition(latLng);
+            Log.d("jiejie", locationInfo.getKey() + "-------已存在");
+            storeMarker.setRotateAngle(locationInfo.getRotation());
+
+            storeMarker.setPositionByPixels(screenPosition.x, screenPosition.y);
+        } else {
+            // 如果不存在就创建
+            Log.d("jiejie", locationInfo.getKey() + "-------不存在" + locationInfo.getLatitude());
+            Point screenPosition = aMap.getProjection().toScreenLocation(latLng);
+            MarkerOptions options = new MarkerOptions();
+            BitmapDescriptor des = BitmapDescriptorFactory.fromBitmap(bitmap);
+            options.icon(des);
+            options.anchor(0.5f, 0.5f);
+            options.position(latLng);
+            Marker marker = aMap.addMarker(options);
+            marker.setRotateAngle(locationInfo.getRotation());
+            marker.setPositionByPixels(screenPosition.x, screenPosition.y);
+            markerMap.put(locationInfo.getKey(), marker);
+        }
+    }
+
+    /**
+     * 绘制2点之间的行车路径
+     *
+     * @param start    开始
+     * @param end      结束
+     * @param color    颜色
+     * @param listener 返回的监听
+     */
+    @Override
+    public void driverRoute(LocationInfo start, LocationInfo end, final int color, final OnRouteCompleteListener listener) {
+        // 1 组装起点和终点信息
+        LatLonPoint startLatLng = new LatLonPoint(start.getLatitude(), start.getLongitude());
+        LatLonPoint endLatLng = new LatLonPoint(end.getLatitude(), end.getLongitude());
+        final RouteSearch.FromAndTo fromAndTo = new RouteSearch.FromAndTo(startLatLng, endLatLng);
+        // 2 创建路径查询参数
+        // 第一个参数表示路径规划的起点和终点
+        // 第二个参数表示驾车模式
+        // 第三个参数表示途径点
+        // 第四个参数表示避让区域
+        // 第五个参数表示避让道路
+        RouteSearch.DriveRouteQuery query =
+                new RouteSearch.DriveRouteQuery(fromAndTo,
+                        RouteSearch.DrivingDefault,
+                        null,
+                        null,
+                        "");
+        // 3 创建搜索对象，异步路径规划驾车模式查询
+        if (mRouteSearch == null) {
+            mRouteSearch = new RouteSearch(mContext);
+        }
+        // 4 执行搜索
+        mRouteSearch.calculateDriveRouteAsyn(query);
+        // 5 接受数据
+        mRouteSearch.setRouteSearchListener(new RouteSearch.OnRouteSearchListener() {
+            @Override
+            public void onBusRouteSearched(BusRouteResult busRouteResult, int i) {
+
+            }
+
+            @Override
+            public void onDriveRouteSearched(DriveRouteResult driveRouteResult, int i) {
+                // 1 获取第一条路径
+                DrivePath drivePath = driveRouteResult.getPaths().get(0);
+                // 2 获取这条路径上所有的点，使用Polyline 绘制路径
+                PolylineOptions polylineOptions = new PolylineOptions();
+                polylineOptions.color(color);
+                // 起点
+                LatLonPoint startPoint = driveRouteResult.getStartPos();
+                // 路径中间步骤
+                List<DriveStep> drivePaths = drivePath.getSteps();
+                // 路径终点
+                LatLonPoint endPoint = driveRouteResult.getTargetPos();
+                // 添加起点
+                polylineOptions.add(new LatLng(startPoint.getLatitude(),
+                        startPoint.getLongitude()));
+                // 添加中间节点
+                for (DriveStep step : drivePaths) {
+                    List<LatLonPoint> latLonPoints = step.getPolyline();
+                    for (LatLonPoint latLonPoint : latLonPoints) {
+                        LatLng latLng = new LatLng(latLonPoint.getLatitude(),
+                                latLonPoint.getLongitude());
+                        polylineOptions.add(latLng);
+                    }
+                }
+                // 添加终点
+                polylineOptions.add(new LatLng(endPoint.getLatitude(), endPoint.getLongitude()));
+                // 执行绘制
+                aMap.addPolyline(polylineOptions);
+                // 3 回调业务
+                if (listener != null) {
+                    RouteInfo info = new RouteInfo();
+                    info.setTaxiCost(driveRouteResult.getTaxiCost());
+                    info.setDuration(10 + new Long(drivePath.getDuration() / 1000 * 60).intValue());
+                    info.setDistance(0.5f + drivePath.getDistance() / 1000);
+                    listener.onComplete(info);
+                }
+            }
+
+            @Override
+            public void onWalkRouteSearched(WalkRouteResult walkRouteResult, int i) {
+
+            }
+
+            @Override
+            public void onRideRouteSearched(RideRouteResult rideRouteResult, int i) {
+
+            }
+        });
     }
 
     /**

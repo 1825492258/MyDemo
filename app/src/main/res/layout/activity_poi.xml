@@ -38,7 +38,7 @@
                 android:hint="你想去哪"
                 android:paddingEnd="20dp"
                 android:paddingStart="20dp"
-
+                android:textColor="@color/clickspan_color"
                 android:textColorHint="#c1c1c7"
                 android:textCursorDrawable="@drawable/shape_edit"
                 android:textSize="13sp" />
