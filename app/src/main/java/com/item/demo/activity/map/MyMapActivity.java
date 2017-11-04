@@ -41,6 +41,7 @@ public class MyMapActivity extends AppCompatActivity {
     private Bitmap mDriverBit; // 车辆的图标
     private LocationInfo mPositionLocation;
     private boolean isMapLoad;
+    private boolean isFirst;
     @BindView(R.id.tv_city)
     TextView tvCity; // 定位的城市
     @BindView(R.id.tv_start)
@@ -55,6 +56,7 @@ public class MyMapActivity extends AppCompatActivity {
     Button btnCallDriver; // 呼叫快车
     @BindView(R.id.btn_cancel)
     Button btnCancel; // 取消
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,7 +86,7 @@ public class MyMapActivity extends AppCompatActivity {
                 tvStart.setText(locationInfo.getName());
                 // 首次定位，添加当前坐标的标记
                 addLocationMarker();
-                mPositionLocation = new LocationInfo("0000", locationInfo.getLatitude(), locationInfo.getLongitude());
+               // mPositionLocation = new LocationInfo("0000", locationInfo.getLatitude(), locationInfo.getLongitude());
             }
         });
         // 地图加载完成
@@ -92,11 +94,11 @@ public class MyMapActivity extends AppCompatActivity {
             @Override
             public void onMapDone() {
                 Log.d("jiejie", "地图加载完成的回调");
-                if (mPositionLocation != null) {
-                    getNearDrivers(mPositionLocation.getLatitude(), mPositionLocation.getLongitude());
-                    addMapDoneMarker(); // 给地图添加中心点Marker
-                }
-
+                // 这个接口 好像用不上了
+//                if(mPositionLocation!=null){
+//                    getNearDrivers(mPositionLocation.getLatitude(), mPositionLocation.getLongitude());
+//                    addMapDoneMarker();
+//                }
             }
         });
         // 地图中心发生了改变
@@ -104,6 +106,13 @@ public class MyMapActivity extends AppCompatActivity {
             @Override
             public void onChangeFinish(LocationInfo result) {
                 // 地图中心改变完成
+                if (!isFirst) {
+                    isFirst = true;
+                    mPositionLocation = result;
+                    getNearDrivers(mPositionLocation.getLatitude(), mPositionLocation.getLongitude());
+                    addMapDoneMarker(); // 给地图添加中心点Marker
+                    mLbsLayer.startJumpAnimation();
+                }
                 if (isMapLoad) return;
 
                 float distance = mLbsLayer.getTwoDistance(mPositionLocation, result);
@@ -146,12 +155,6 @@ public class MyMapActivity extends AppCompatActivity {
         });
     }
 
-    /**
-     * 获取附近的
-     *
-     * @param latitude
-     * @param longitude
-     */
     List<LocationInfo> mData = new ArrayList<>();
 
     /**
@@ -206,8 +209,8 @@ public class MyMapActivity extends AppCompatActivity {
     /**
      * 绘制起点 终点路径
      *
-     * @param mStartLocation
-     * @param mEndLocation
+     * @param mStartLocation 起点
+     * @param mEndLocation   终点
      */
     private void showRoute(final LocationInfo mStartLocation, final LocationInfo mEndLocation) {
         mLbsLayer.clearAllMarkers();
@@ -222,7 +225,7 @@ public class MyMapActivity extends AppCompatActivity {
                         Log.d("jiejie", result.getTaxiCost() + " " + result.getDistance() + "  " + result.getDuration());
                         mLbsLayer.moveCameraTwo(mStartLocation, mEndLocation);
                         mOptArea.setVisibility(View.VISIBLE);
-                        tvTipInfo.setText("全程" + result.getDistance() + "公里,  预计" + result.getTaxiCost() + "元，" +result.getDuration() + "分钟到达");
+                        tvTipInfo.setText("全程" + result.getDistance() + "公里,  预计" + result.getTaxiCost() + "元，" + result.getDuration() + "分钟到达");
                     }
                 });
     }
@@ -230,15 +233,15 @@ public class MyMapActivity extends AppCompatActivity {
     /**
      * 恢复界面
      */
-    private void restoreUI(){
+    private void restoreUI() {
         // 清楚地图上所有的标记
         mLbsLayer.clearAllMarkers();
         // 添加定位标记
         addLocationMarker();
         // 恢复地图视野
-        mLbsLayer.moveCameraToPoint(mPositionLocation,14);
+        mLbsLayer.moveCameraToPoint(mPositionLocation, 14);
         // 获取附近司机
-        getNearDrivers(mPositionLocation.getLatitude(),mPositionLocation.getLongitude());
+        getNearDrivers(mPositionLocation.getLatitude(), mPositionLocation.getLongitude());
         // 添加中心的Marker
         addMapDoneMarker();
         isMapLoad = false;
@@ -266,7 +269,7 @@ public class MyMapActivity extends AppCompatActivity {
                     R.drawable.ic_position);
         }
         mLbsLayer.addMarkerCenter(mPositionBit);
-       // mLbsLayer.addOnMydateMarker(mPositionLocation, mPositionBit);
+        // mLbsLayer.addOnMydateMarker(mPositionLocation, mPositionBit);
     }
 
     /**

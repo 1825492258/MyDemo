@@ -31,6 +31,12 @@
 
 ### 5.高德地图简单实用
     5.1 获取kay F:\WorkPlace\MyDemo>keytool -list -v -keystore app/keystore/debug.jks
+    5.2 对高德地图的封装,将MapView看做View,建立ILbsLayer接口封装功能
+        实现了定位,获取定位的信息
+        搜索的功能,主要用到根据坐标搜索附近和根据搜索内容来搜素
+        添加Marker，和在地图中心添加一个Marker
+        设置Zoom 移动地图中心到某个点 移动地图在2点的可视范围
+        路径的规划,获取路径并画出来
 
 ### 6.OkHttp3.0的基本的使用
     6.1 项目中GET的封装

@@ -46,6 +46,12 @@ public interface ILbsLayer {
     String getCity();
 
     /**
+     * 缩放地图大小
+     * @param zoom 地图缩放大小(3-19)
+     */
+    void onMapZoom(float zoom);
+
+    /**
      * 计算2点间直线距离
      * @param locationInfo1 第一个点
      * @param locationInfo2 第二个点
@@ -56,8 +62,6 @@ public interface ILbsLayer {
      * 添加更新标记点，包括位置，角度
      */
     void addOnUpdateMarker(LocationInfo locationInfo, Bitmap bitmap);
-
-    //void addOnMydateMarker(LocationInfo locationInfo,Bitmap bitmap);
 
     /**
      * 在屏幕中心添加一个Marker

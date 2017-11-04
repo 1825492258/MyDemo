@@ -385,38 +385,6 @@ public class MapLbsLayerImpl implements ILbsLayer {
             Log.e("amap", "screenMarker is null");
         }
     }
-    //    /**
-//     * 添加屏幕中心
-//     * @param locationInfo
-//     * @param bitmap
-//     */
-//    @Override
-//    public void addOnMydateMarker(LocationInfo locationInfo, Bitmap bitmap) {
-//        Marker storeMarker = markerMap.get(locationInfo.getKey());
-//        LatLng latLng = new LatLng(locationInfo.getLatitude(), locationInfo.getLongitude());
-//        if (storeMarker != null) {
-//            // 如果已经存在就更换角度位置
-//            Point screenPosition = aMap.getProjection().toScreenLocation(latLng);
-//            storeMarker.setPosition(latLng);
-//            Log.d("jiejie", locationInfo.getKey() + "-------已存在");
-//            storeMarker.setRotateAngle(locationInfo.getRotation());
-//
-//            storeMarker.setPositionByPixels(screenPosition.x, screenPosition.y);
-//        } else {
-//            // 如果不存在就创建
-//            Log.d("jiejie", locationInfo.getKey() + "-------不存在" + locationInfo.getLatitude());
-//            Point screenPosition = aMap.getProjection().toScreenLocation(latLng);
-//            MarkerOptions options = new MarkerOptions();
-//            BitmapDescriptor des = BitmapDescriptorFactory.fromBitmap(bitmap);
-//            options.icon(des);
-//            options.anchor(0.5f, 0.5f);
-//            options.position(latLng);
-//            Marker marker = aMap.addMarker(options);
-//            marker.setRotateAngle(locationInfo.getRotation());
-//            marker.setPositionByPixels(screenPosition.x, screenPosition.y);
-//            markerMap.put(locationInfo.getKey(), marker);
-//        }
-//    }
 
     /**
      * 绘制2点之间的行车路径
@@ -525,6 +493,11 @@ public class MapLbsLayerImpl implements ILbsLayer {
                 latLng, scale, 0, 0
         ));
         aMap.moveCamera(up);
+    }
+
+    @Override
+    public void onMapZoom(float zoom) {
+        aMap.moveCamera(CameraUpdateFactory.zoomTo(zoom));
     }
 
     /**
