@@ -77,7 +77,8 @@
         <activity android:name=".activity.http.PhotoTwoActivity" />
         <activity android:name=".activity.refresh.MyListActivity" />
         <activity android:name=".test.TestTwoActivity" />
-        <activity android:name=".activity.map.PositionActivity"></activity>
+        <activity android:name=".activity.map.PositionActivity" />
+        <activity android:name=".activity.mvp.MyMVPActivity"></activity>
     </application>
 
 </manifest>
