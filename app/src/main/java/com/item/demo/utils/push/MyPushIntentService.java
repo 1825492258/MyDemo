@@ -1,4 +1,4 @@
-package com.item.demo.push;
+package com.item.demo.utils.push;
 
 import android.app.ActivityManager;
 import android.app.Notification;
@@ -6,13 +6,11 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 
 import com.item.demo.R;
-import com.item.demo.test.TestActivity;
 import com.umeng.message.UTrack;
 import com.umeng.message.UmengMessageService;
 import com.umeng.message.entity.UMessage;

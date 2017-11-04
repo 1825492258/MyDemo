@@ -3,7 +3,7 @@ package com.item.demo.application;
 import android.app.Application;
 import android.util.Log;
 
-import com.item.demo.push.MyPushIntentService;
+import com.item.demo.utils.push.MyPushIntentService;
 import com.umeng.message.IUmengRegisterCallback;
 import com.umeng.message.MsgConstant;
 import com.umeng.message.PushAgent;

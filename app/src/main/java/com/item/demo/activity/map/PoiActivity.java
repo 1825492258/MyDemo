@@ -14,9 +14,9 @@ import android.widget.ListView;
 
 import com.item.demo.R;
 import com.item.demo.adapter.PoiAdapter;
-import com.item.demo.lbs.ILbsLayer;
-import com.item.demo.lbs.LocationInfo;
-import com.item.demo.lbs.MapLbsLayerImpl;
+import com.item.demo.utils.lbs.ILbsLayer;
+import com.item.demo.utils.lbs.LocationInfo;
+import com.item.demo.utils.lbs.MapLbsLayerImpl;
 
 import java.util.List;
 

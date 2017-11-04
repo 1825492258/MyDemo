@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.item.demo.R;
-import com.item.demo.lbs.LocationInfo;
+import com.item.demo.utils.lbs.LocationInfo;
 
 import java.util.List;
 

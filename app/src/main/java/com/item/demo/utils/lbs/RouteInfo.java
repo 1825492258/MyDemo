@@ -1,4 +1,4 @@
-package com.item.demo.lbs;
+package com.item.demo.utils.lbs;
 
 /**
  * Created by wuzongjie on 2017/11/3.

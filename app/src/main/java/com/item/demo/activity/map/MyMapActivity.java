@@ -17,10 +17,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.item.demo.R;
-import com.item.demo.lbs.ILbsLayer;
-import com.item.demo.lbs.LocationInfo;
-import com.item.demo.lbs.MapLbsLayerImpl;
-import com.item.demo.lbs.RouteInfo;
+import com.item.demo.utils.lbs.ILbsLayer;
+import com.item.demo.utils.lbs.LocationInfo;
+import com.item.demo.utils.lbs.MapLbsLayerImpl;
+import com.item.demo.utils.lbs.RouteInfo;
 import com.item.demo.utils.ToastUtils;
 
 import java.util.ArrayList;

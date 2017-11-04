@@ -1,4 +1,4 @@
-package com.item.demo.lbs;
+package com.item.demo.utils.lbs;
 
 import java.io.Serializable;
 
