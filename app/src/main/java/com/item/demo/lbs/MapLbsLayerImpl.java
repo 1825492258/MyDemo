@@ -6,6 +6,7 @@ import android.graphics.Point;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Interpolator;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
@@ -25,6 +26,8 @@ import com.amap.api.maps.model.LatLngBounds;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.PolylineOptions;
+import com.amap.api.maps.model.animation.Animation;
+import com.amap.api.maps.model.animation.TranslateAnimation;
 import com.amap.api.services.core.AMapException;
 import com.amap.api.services.core.LatLonPoint;
 import com.amap.api.services.core.PoiItem;
@@ -40,6 +43,7 @@ import com.amap.api.services.route.DriveStep;
 import com.amap.api.services.route.RideRouteResult;
 import com.amap.api.services.route.RouteSearch;
 import com.amap.api.services.route.WalkRouteResult;
+import com.item.demo.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -315,33 +319,104 @@ public class MapLbsLayerImpl implements ILbsLayer {
         }
     }
 
-    @Override
-    public void addOnMydateMarker(LocationInfo locationInfo, Bitmap bitmap) {
-        Marker storeMarker = markerMap.get(locationInfo.getKey());
-        LatLng latLng = new LatLng(locationInfo.getLatitude(), locationInfo.getLongitude());
-        if (storeMarker != null) {
-            // 如果已经存在就更换角度位置
-            Point screenPosition = aMap.getProjection().toScreenLocation(latLng);
-            storeMarker.setPosition(latLng);
-            Log.d("jiejie", locationInfo.getKey() + "-------已存在");
-            storeMarker.setRotateAngle(locationInfo.getRotation());
+    /**
+     * 地图中心出添加一个Marker
+     *
+     * @param bitmap 图片资源
+     */
+    private Marker screenMarker;
 
-            storeMarker.setPositionByPixels(screenPosition.x, screenPosition.y);
+    @Override
+    public void addMarkerCenter(Bitmap bitmap) {
+        LatLng latLng = aMap.getCameraPosition().target;
+        Point screenPosition = aMap.getProjection().toScreenLocation(latLng);
+        if (screenMarker != null) {
+            screenMarker.setPosition(latLng);
+            //设置Marker在屏幕上,不跟随地图移动
+            Log.d("jiejie", "------已存在");
+            screenMarker.setPositionByPixels(screenPosition.x, screenPosition.y);
         } else {
-            // 如果不存在就创建
-            Log.d("jiejie", locationInfo.getKey() + "-------不存在" + locationInfo.getLatitude());
-            Point screenPosition = aMap.getProjection().toScreenLocation(latLng);
+            Log.d("jiejie", "-------- 不存在");
             MarkerOptions options = new MarkerOptions();
             BitmapDescriptor des = BitmapDescriptorFactory.fromBitmap(bitmap);
             options.icon(des);
             options.anchor(0.5f, 0.5f);
             options.position(latLng);
-            Marker marker = aMap.addMarker(options);
-            marker.setRotateAngle(locationInfo.getRotation());
-            marker.setPositionByPixels(screenPosition.x, screenPosition.y);
-            markerMap.put(locationInfo.getKey(), marker);
+            screenMarker = aMap.addMarker(options);
+            //设置Marker在屏幕上,不跟随地图移动
+            screenMarker.setPositionByPixels(screenPosition.x, screenPosition.y);
         }
     }
+
+    /**
+     * 屏幕中心marker 跳动
+     */
+    @Override
+    public void startJumpAnimation() {
+
+        if (screenMarker != null) {
+            //根据屏幕距离计算需要移动的目标点
+            final LatLng latLng = screenMarker.getPosition();
+            Point point = aMap.getProjection().toScreenLocation(latLng);
+            point.y -= ToastUtils.dp2px(mContext, 45);
+            LatLng target = aMap.getProjection()
+                    .fromScreenLocation(point);
+            //使用TranslateAnimation,填写一个需要移动的目标点
+            Animation animation = new TranslateAnimation(target);
+            animation.setInterpolator(new Interpolator() {
+                @Override
+                public float getInterpolation(float input) {
+                    // 模拟重加速度的interpolator
+                    if (input <= 0.5) {
+                        return (float) (0.5f - 2 * (0.5 - input) * (0.5 - input));
+                    } else {
+                        return (float) (0.5f - Math.sqrt((input - 0.5f) * (1.5f - input)));
+                    }
+                }
+            });
+            //整个移动所需要的时间
+            animation.setDuration(500);
+            //设置动画
+            screenMarker.setAnimation(animation);
+            //开始动画
+            screenMarker.startAnimation();
+
+        } else {
+            Log.e("amap", "screenMarker is null");
+        }
+    }
+    //    /**
+//     * 添加屏幕中心
+//     * @param locationInfo
+//     * @param bitmap
+//     */
+//    @Override
+//    public void addOnMydateMarker(LocationInfo locationInfo, Bitmap bitmap) {
+//        Marker storeMarker = markerMap.get(locationInfo.getKey());
+//        LatLng latLng = new LatLng(locationInfo.getLatitude(), locationInfo.getLongitude());
+//        if (storeMarker != null) {
+//            // 如果已经存在就更换角度位置
+//            Point screenPosition = aMap.getProjection().toScreenLocation(latLng);
+//            storeMarker.setPosition(latLng);
+//            Log.d("jiejie", locationInfo.getKey() + "-------已存在");
+//            storeMarker.setRotateAngle(locationInfo.getRotation());
+//
+//            storeMarker.setPositionByPixels(screenPosition.x, screenPosition.y);
+//        } else {
+//            // 如果不存在就创建
+//            Log.d("jiejie", locationInfo.getKey() + "-------不存在" + locationInfo.getLatitude());
+//            Point screenPosition = aMap.getProjection().toScreenLocation(latLng);
+//            MarkerOptions options = new MarkerOptions();
+//            BitmapDescriptor des = BitmapDescriptorFactory.fromBitmap(bitmap);
+//            options.icon(des);
+//            options.anchor(0.5f, 0.5f);
+//            options.position(latLng);
+//            Marker marker = aMap.addMarker(options);
+//            marker.setRotateAngle(locationInfo.getRotation());
+//            marker.setPositionByPixels(screenPosition.x, screenPosition.y);
+//            markerMap.put(locationInfo.getKey(), marker);
+//        }
+//    }
 
     /**
      * 绘制2点之间的行车路径
@@ -501,5 +576,6 @@ public class MapLbsLayerImpl implements ILbsLayer {
     public void clearAllMarkers() {
         aMap.clear();
         markerMap.clear();
+        screenMarker = null;
     }
 }

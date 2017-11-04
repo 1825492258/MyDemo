@@ -57,7 +57,17 @@ public interface ILbsLayer {
      */
     void addOnUpdateMarker(LocationInfo locationInfo, Bitmap bitmap);
 
-    void addOnMydateMarker(LocationInfo locationInfo,Bitmap bitmap);
+    //void addOnMydateMarker(LocationInfo locationInfo,Bitmap bitmap);
+
+    /**
+     * 在屏幕中心添加一个Marker
+     * @param bitmap 图片资源
+     */
+    void addMarkerCenter(Bitmap bitmap);
+    /**
+     * 屏幕中心marker 跳动
+     */
+    void startJumpAnimation();
 
     /**
      * 地图加载完成

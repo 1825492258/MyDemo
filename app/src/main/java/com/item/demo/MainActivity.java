@@ -16,6 +16,7 @@ import com.item.demo.activity.http.HttpOneActivity;
 import com.item.demo.activity.http.PhotoActivity;
 import com.item.demo.activity.http.PhotoTwoActivity;
 import com.item.demo.activity.map.MyMapActivity;
+import com.item.demo.activity.map.PositionActivity;
 import com.item.demo.activity.recycler.PullToRefreshUseActivity;
 import com.item.demo.activity.recycler.TestOneActivity;
 import com.item.demo.activity.recycler.adapter.HomeAdapter;
@@ -74,9 +75,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
     }
+
     @RegisterBus
-    public void onPush(TestBean bean){
-        Log.d("jiejie","接受到的信息 ： " +bean );
+    public void onPush(TestBean bean) {
+        Log.d("jiejie", "接受到的信息 ： " + bean);
         ToastUtils.showToast(bean.getMsg());
     }
 
@@ -89,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.btn_one:
                 // 到TestOne
                 startActivity(new Intent(MainActivity.this, TestOneActivity.class));
@@ -114,10 +116,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(this, TestTwoActivity.class));
                 break;
             case R.id.btn_seven: // 测试高德地图的封装
-                startActivity(new Intent(this,MyMapActivity.class));
+                startActivity(new Intent(this, MyMapActivity.class));
                 break;
             case R.id.btn_eight: // 测试高德地图
-
+                startActivity(new Intent(this, PositionActivity.class));
                 break;
         }
     }

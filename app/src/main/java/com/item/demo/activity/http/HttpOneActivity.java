@@ -78,10 +78,10 @@ public class HttpOneActivity extends AppCompatActivity implements View.OnClickLi
         OKHttpClientImp.getInstance().get(request, false, new IHttpClient.RequestCallBack() {
             @Override
             public void onSuccess(BaseResponse response) {
-                Log.d("jiejie", response.getCode() + "   " + response.getData());
-                ToastUtils.showToast(response.getCode() + "  " + response.getData());
-                MSMcode base = new Gson().fromJson(response.getData(), MSMcode.class);
-                codes = base.getData().getVerificationCode();
+//                Log.d("jiejie", response.getCode() + "   " + response.getData());
+               ToastUtils.showToast(response.getCode() + "  " + response.getData());
+//                MSMcode base = new Gson().fromJson(response.getData(), MSMcode.class);
+//                codes = base.getData().getVerificationCode();
             }
 
             @Override
@@ -91,7 +91,7 @@ public class HttpOneActivity extends AppCompatActivity implements View.OnClickLi
         });
     }
 
-    private String codes;
+    private String codes= "";
     private String token = "";
 
     private void login(String phone, String code) {
@@ -101,12 +101,13 @@ public class HttpOneActivity extends AppCompatActivity implements View.OnClickLi
         OKHttpClientImp.getInstance().get(request, false, new IHttpClient.RequestCallBack() {
             @Override
             public void onSuccess(BaseResponse response) {
-                Log.d("jiejie", "onSuccess" + response.getCode() + "   " + response.getData());
-                UserInfo userInfo = new Gson().fromJson(response.getData(), UserInfo.class);
-                if (userInfo.getStatus().equals("SUCCESS")) {
-                    token = userInfo.getData().getUserInfo().getId() + "_" + userInfo.getData().getToken();
-                }
-                Log.d("jiejie", "token:" + token);
+                ToastUtils.showToast(response.getCode() + "  " + response.getData());
+//                Log.d("jiejie", "onSuccess" + response.getCode() + "   " + response.getData());
+//                UserInfo userInfo = new Gson().fromJson(response.getData(), UserInfo.class);
+//                if (userInfo.getStatus().equals("SUCCESS")) {
+//                    token = userInfo.getData().getUserInfo().getId() + "_" + userInfo.getData().getToken();
+//                }
+//                Log.d("jiejie", "token:" + token);
             }
 
             @Override
@@ -123,6 +124,7 @@ public class HttpOneActivity extends AppCompatActivity implements View.OnClickLi
         OKHttpClientImp.getInstance().get(request, false, new IHttpClient.RequestCallBack() {
             @Override
             public void onSuccess(BaseResponse response) {
+                ToastUtils.showToast(response.getCode() + "  " + response.getData());
                 Log.d("jiejie", "response " + response.getCode() + "  " + response.getData());
             }
 
@@ -147,11 +149,13 @@ public class HttpOneActivity extends AppCompatActivity implements View.OnClickLi
         OKHttpClientImp.getInstance().post(request, false, new IHttpClient.RequestCallBack() {
             @Override
             public void onSuccess(BaseResponse response) {
+                ToastUtils.showToast(response.getCode() + "  " + response.getData());
                 Log.d("jiejie", "response" + response.getCode() + "  " + response.getData());
             }
 
             @Override
             public void onFailure(int code) {
+               ToastUtils.showToast("返回错误码" + code);
                 Log.d("jiejie", "onFailure" + code);
             }
         });

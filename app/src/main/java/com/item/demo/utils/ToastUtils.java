@@ -49,6 +49,16 @@ public class ToastUtils {
     }
 
     /**
+     * DP转为PX
+     * @param context 上下文对象
+     * @param dpValue 转化的长度
+     * @return PX
+     */
+    public static int dp2px(Context context, float dpValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f); // // 4.9->5 4.4->4
+    }
+    /**
      * 申请指定的权限
      *
      * @param activity    上下文

@@ -105,6 +105,7 @@ public class MyMapActivity extends AppCompatActivity {
             public void onChangeFinish(LocationInfo result) {
                 // 地图中心改变完成
                 if (isMapLoad) return;
+
                 float distance = mLbsLayer.getTwoDistance(mPositionLocation, result);
                 if (distance > 5000) { // 如果2点移动的距离大于3000的话
                     Log.d("jiejie", "距离----" + distance);
@@ -113,6 +114,7 @@ public class MyMapActivity extends AppCompatActivity {
                     addLocationMarker();
                     getNearDrivers(mPositionLocation.getLatitude(), mPositionLocation.getLongitude());
                     addMapDoneMarker();
+                    mLbsLayer.startJumpAnimation();
                 }
             }
 
@@ -263,7 +265,8 @@ public class MyMapActivity extends AppCompatActivity {
             mPositionBit = BitmapFactory.decodeResource(getResources(),
                     R.drawable.ic_position);
         }
-        mLbsLayer.addOnMydateMarker(mPositionLocation, mPositionBit);
+        mLbsLayer.addMarkerCenter(mPositionBit);
+       // mLbsLayer.addOnMydateMarker(mPositionLocation, mPositionBit);
     }
 
     /**

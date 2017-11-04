@@ -57,7 +57,8 @@
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="227b523130425487380e95832d25263d" />
-        <service android:name="com.amap.api.location.APSService"/>
+
+        <service android:name="com.amap.api.location.APSService" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -75,7 +76,8 @@
         <activity android:name=".activity.http.PhotoActivity" />
         <activity android:name=".activity.http.PhotoTwoActivity" />
         <activity android:name=".activity.refresh.MyListActivity" />
-        <activity android:name=".test.TestTwoActivity"></activity>
+        <activity android:name=".test.TestTwoActivity" />
+        <activity android:name=".activity.map.PositionActivity"></activity>
     </application>
 
 </manifest>
