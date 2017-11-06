@@ -18,8 +18,9 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <!-- 允许程序访问CellID或WiFi热点来获取粗略的位置 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <!--监听GPS-->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <!-- 监听GPS -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:name=".application.MyApplication"
         android:allowBackup="true"
@@ -42,13 +43,15 @@
         <activity android:name=".activity.refresh.RefreshActivity" />
 
         <service android:name=".utils.push.MyPushIntentService" />
-        <receiver android:name=".receiver.NetworkConnectChangedReceiver"/>
-            <!--<intent-filter>
+
+        <receiver android:name=".receiver.NetworkConnectChangedReceiver" />
+        <!--
+            <intent-filter>
                 <action android:name="android.NET.conn.CONNECTIVITY_CHANGE" />
                 <action android:name="android.Net.wifi.WIFI_STATE_CHANGED" />
                 <action android:name="android.net.wifi.STATE_CHANGE" />
-            </intent-filter>-->
-
+            </intent-filter>
+        -->
 
         <meta-data
             android:name="UMENG_APPKEY"
@@ -86,7 +89,8 @@
         <activity android:name=".activity.refresh.MyListActivity" />
         <activity android:name=".test.TestTwoActivity" />
         <activity android:name=".activity.map.PositionActivity" />
-        <activity android:name=".activity.mvp.MyMVPActivity"></activity>
+        <activity android:name=".activity.mvp.MyMVPActivity" />
+        <activity android:name=".activity.ult.UltActivity"></activity>
     </application>
 
 </manifest>

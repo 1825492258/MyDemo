@@ -69,5 +69,20 @@
     7.2 第二种使用，使用第三方库PictureSelector来实现
     7.3 第三种使用，以前写的http://www.cnblogs.com/wangfengdange/p/7443389.html来实现
 
+### 8.获取网络的状态的切换
+    8.1 定义一个BroadcastReceiver
+    8.2 实例化过滤器
+    8.3 绑定
+         // 定义并实例化过滤器
+         IntentFilter filter = new IntentFilter();
+         // 添加过滤器的值
+         filter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
+         //filter.addAction("android.net.wifi.WIFI_STATE_CHANGED");
+         // filter.addAction("android.net.wifi.STATE_CHANGE");
+         // 实例化广播监听器
+         mReceiver = new NetworkConnectChangedReceiver();
+
+### 9.轮播图的实现
+    9.1 用UltraViewPager来实现  https://github.com/alibaba/UltraViewPager
 
 

@@ -23,6 +23,7 @@ import com.item.demo.activity.recycler.adapter.HomeAdapter;
 import com.item.demo.activity.refresh.BasicUsingActivity;
 import com.item.demo.activity.refresh.RefreshActivity;
 import com.item.demo.activity.refresh.TextRefreshActivity;
+import com.item.demo.activity.ult.UltActivity;
 import com.item.demo.entity.TestBean;
 import com.item.demo.network.http.IHttpClient;
 import com.item.demo.network.http.IRequest;
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.btn_six).setOnClickListener(this);
         findViewById(R.id.btn_seven).setOnClickListener(this);
         findViewById(R.id.btn_eight).setOnClickListener(this);
+        findViewById(R.id.btn_nine).setOnClickListener(this);
     }
 
     /**
@@ -100,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(MainActivity.this, RefreshActivity.class));
                 break;
             case R.id.btn_three: // 测试网络请求
-             //   fetchSMSCode("12121212");
+                //   fetchSMSCode("12121212");
                 startActivity(new Intent(MainActivity.this, HttpOneActivity.class));
                 break;
             case R.id.btn_four:
@@ -120,6 +122,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn_eight: // 测试高德地图
                 startActivity(new Intent(this, PositionActivity.class));
+                break;
+            case R.id.btn_nine: // UltraViewPager的使用
+                startActivity(new Intent(this, UltActivity.class));
                 break;
         }
     }

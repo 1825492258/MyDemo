@@ -41,6 +41,9 @@ dependencies {
     })
     compile project(':PushSDK')
 
+    compile('com.alibaba.android:ultraviewpager:1.0.6.1@aar') {
+        transitive = true
+    }
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.32'
