@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(MainActivity.this, RefreshActivity.class));
                 break;
             case R.id.btn_three: // 测试网络请求
-                fetchSMSCode("12121212");
+             //   fetchSMSCode("12121212");
                 startActivity(new Intent(MainActivity.this, HttpOneActivity.class));
                 break;
             case R.id.btn_four:

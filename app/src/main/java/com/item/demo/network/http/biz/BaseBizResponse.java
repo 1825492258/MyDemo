@@ -5,7 +5,7 @@ package com.item.demo.network.http.biz;
  * 返回数据的公共格式
  */
 
-public class BaseBizResponse {
+public class BaseBizResponse<T> {
 
     private String status; // 返回SUCCESS  ERROR
     private String error; // 返回msg

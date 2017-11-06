@@ -35,7 +35,7 @@
         android:id="@+id/btn_http_three"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="解析" />
+        android:text="解析字符串" />
 
     <com.item.demo.utils.view.LQRRefreshButton
         android:id="@+id/btn_refresh"

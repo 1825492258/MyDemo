@@ -14,10 +14,12 @@ import com.item.demo.entity.UserInfo;
 import com.item.demo.network.http.IHttpClient;
 import com.item.demo.network.http.IRequest;
 import com.item.demo.network.http.IResponse;
+import com.item.demo.network.http.biz.BaseBizResponse;
 import com.item.demo.network.http.impl.BaseRequest;
 import com.item.demo.network.http.impl.BaseResponse;
 import com.item.demo.network.http.impl.OKHttpClientImp;
 import com.item.demo.utils.HttpConstants;
+import com.item.demo.utils.NetWorkUtils;
 import com.item.demo.utils.ToastUtils;
 
 import butterknife.BindView;
@@ -47,6 +49,11 @@ public class HttpOneActivity extends AppCompatActivity implements View.OnClickLi
         btnThreeJson.setOnClickListener(this);
         btnFourHttp.setOnClickListener(this);
         btnFiveHttp.setOnClickListener(this);
+       boolean isNetWork = NetWorkUtils.isNetworkConnected();
+       boolean isWifi = NetWorkUtils.isWifiConnected();
+       boolean isMobile = NetWorkUtils.isMobileCommected();
+       boolean isGPS =NetWorkUtils.isGPSEnabled();
+        Log.d("jiejie","网络是否连接 " + isNetWork + "  WIFI " +isWifi + "    MOBILE " + isMobile + "   GPS " + isGPS);
     }
 
     @Override
@@ -59,7 +66,7 @@ public class HttpOneActivity extends AppCompatActivity implements View.OnClickLi
                 login("18256025758", codes);
                 break;
             case R.id.btn_http_three: // JSON解析
-                ceshiJson(json1);
+                ceshiJson(json);
                 break;
             case R.id.btn_http_four: // 钱包支付 需要token
                 setHttpPay();
@@ -169,7 +176,9 @@ public class HttpOneActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void run() {
                 MSMcode base = new Gson().fromJson(json, MSMcode.class);
-                Log.d("jiejie", base.getStatus() + "   " + base.getData().getVerificationCode());
+                Log.d("jiejie",base.getStatus() + " " + base.getData() + "  " + base.getData().getVerificationCode());
+               // BaseBizResponse<MSMcode> mcodeBaseBizResponse = new Gson().fromJson(json,BaseBizResponse.class);
+                //Log.d("jiejie",mcodeBaseBizResponse.getData().getVerificationCode());
             }
         }).start();
     }
