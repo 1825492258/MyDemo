@@ -65,10 +65,10 @@ public class MyMapActivity extends AppCompatActivity {
         mLbsLayer = new MapLbsLayerImpl(this);
         mLbsLayer.onCreate(savedInstanceState);
 
-        if (ToastUtils.hasPermission(this, Manifest.permission.READ_PHONE_STATE)) {
+        if (ToastUtils.hasPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)) {
             mLbsLayer.startLocationMap(); // 开始定位 这里要加个动态权限
         } else {
-            ToastUtils.requestPermission(this, 0x01, Manifest.permission.READ_PHONE_STATE);
+            ToastUtils.requestPermission(this, 0x01, Manifest.permission.ACCESS_COARSE_LOCATION);
         }
         // 定位改变
         mLbsLayer.setLocationChangeListener(new ILbsLayer.CommonLocationChangeListener() {
@@ -86,7 +86,7 @@ public class MyMapActivity extends AppCompatActivity {
                 tvStart.setText(locationInfo.getName());
                 // 首次定位，添加当前坐标的标记
                 addLocationMarker();
-               // mPositionLocation = new LocationInfo("0000", locationInfo.getLatitude(), locationInfo.getLongitude());
+                // mPositionLocation = new LocationInfo("0000", locationInfo.getLatitude(), locationInfo.getLongitude());
             }
         });
         // 地图加载完成
