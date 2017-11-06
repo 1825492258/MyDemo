@@ -14,13 +14,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.item.demo.R;
+import com.item.demo.receiver.NetworkConnectChangedReceiver;
+import com.item.demo.utils.NetWorkUtils;
 
 /**
  * BaseActivity
  * Created by wuzongjie on 2017/10/23.
  */
 
-public class BaseActivity extends AppCompatActivity {
+public class BaseActivity extends AppCompatActivity implements NetworkConnectChangedReceiver.NetEvevt{
     private TextView title;
     protected final String TAG = "jiejie";
     private ImageView back;
@@ -68,6 +70,8 @@ public class BaseActivity extends AppCompatActivity {
         // 这句很关键，注意是调用父类的方法
         super.setContentView(R.layout.activity_base);
         initToolbar();
+       // netMobile = NetWorkUtils.getNetWorkState(this);
+        evevt = this;
     }
 
     private void initToolbar() {
@@ -94,5 +98,11 @@ public class BaseActivity extends AppCompatActivity {
         if (rootLayout == null) return;
         rootLayout.addView(view, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         initToolbar();
+    }
+    public static NetworkConnectChangedReceiver.NetEvevt evevt;
+
+    @Override
+    public void onNetChange(int netMobile) {
+
     }
 }

@@ -42,6 +42,13 @@
         <activity android:name=".activity.refresh.RefreshActivity" />
 
         <service android:name=".utils.push.MyPushIntentService" />
+        <receiver android:name=".receiver.NetworkConnectChangedReceiver"/>
+            <!--<intent-filter>
+                <action android:name="android.NET.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.Net.wifi.WIFI_STATE_CHANGED" />
+                <action android:name="android.net.wifi.STATE_CHANGE" />
+            </intent-filter>-->
+
 
         <meta-data
             android:name="UMENG_APPKEY"

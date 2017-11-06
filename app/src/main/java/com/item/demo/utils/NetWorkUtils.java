@@ -51,12 +51,34 @@ public class NetWorkUtils {
      *
      * @return Boolean
      */
-    public static boolean isMobileCommected() {
+    public static boolean isMobileConnected() {
         ConnectivityManager manager = (ConnectivityManager) MyApplication.getInstance()
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
         // 获取NetworkInfo对象
         NetworkInfo networkInfo = manager.getActiveNetworkInfo();
         return networkInfo != null && networkInfo.getType() == ConnectivityManager.TYPE_MOBILE;
+    }
+
+    /**
+     * 获取连接类型
+     * @return
+     */
+    public static int getNetWorkState(Context context) {
+        // 获取手机所有连接管理对象
+        ConnectivityManager manager = (ConnectivityManager) context
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        // 获取NetworkInfo对象
+        NetworkInfo networkInfo = manager.getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isConnected()) {
+            if (networkInfo.getType() == ConnectivityManager.TYPE_WIFI) {
+                return 1;
+            } else if (networkInfo.getType() == ConnectivityManager.TYPE_MOBILE) {
+                return 2;
+            } else {
+                return 0;
+            }
+        }
+        return 0;
     }
 
     /**

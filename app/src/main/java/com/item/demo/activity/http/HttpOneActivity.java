@@ -1,14 +1,17 @@
 package com.item.demo.activity.http;
 
+import android.content.IntentFilter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.item.demo.R;
+import com.item.demo.activity.base.BaseActivity;
 import com.item.demo.entity.MSMcode;
 import com.item.demo.entity.UserInfo;
 import com.item.demo.network.http.IHttpClient;
@@ -18,6 +21,7 @@ import com.item.demo.network.http.biz.BaseBizResponse;
 import com.item.demo.network.http.impl.BaseRequest;
 import com.item.demo.network.http.impl.BaseResponse;
 import com.item.demo.network.http.impl.OKHttpClientImp;
+import com.item.demo.receiver.NetworkConnectChangedReceiver;
 import com.item.demo.utils.HttpConstants;
 import com.item.demo.utils.NetWorkUtils;
 import com.item.demo.utils.ToastUtils;
@@ -25,8 +29,9 @@ import com.item.demo.utils.ToastUtils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class HttpOneActivity extends AppCompatActivity implements View.OnClickListener {
-
+public class HttpOneActivity extends BaseActivity implements View.OnClickListener {
+    @BindView(R.id.text_http)
+    TextView tvHttp;
     @BindView(R.id.btn_http_one)
     Button btnOneHttp; // 测试发送验证码
     @BindView(R.id.btn_http_two)
@@ -37,13 +42,27 @@ public class HttpOneActivity extends AppCompatActivity implements View.OnClickLi
     Button btnFourHttp;
     @BindView(R.id.btn_http_five)
     Button btnFiveHttp;
+    private NetworkConnectChangedReceiver mReceiver; // 定义一个广播监听器
+
+    @Override
+    public void onNetChange(int netMobile) {
+        super.onNetChange(netMobile);
+        Log.d("jiejie","-----界面的接受---" + netMobile);
+        if(netMobile==1){
+            tvHttp.setText("当前是WIFI连接");
+        }else if (netMobile == 2){
+            tvHttp.setText("当前是流量模式");
+        }else {
+            tvHttp.setText("丫的，没网啊");
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_http_one);
         ButterKnife.bind(this);
-
+        setBackBtn();
         btnOneHttp.setOnClickListener(this);
         btnTwoHttp.setOnClickListener(this);
         btnThreeJson.setOnClickListener(this);
@@ -51,9 +70,26 @@ public class HttpOneActivity extends AppCompatActivity implements View.OnClickLi
         btnFiveHttp.setOnClickListener(this);
        boolean isNetWork = NetWorkUtils.isNetworkConnected();
        boolean isWifi = NetWorkUtils.isWifiConnected();
-       boolean isMobile = NetWorkUtils.isMobileCommected();
+       boolean isMobile = NetWorkUtils.isMobileConnected();
        boolean isGPS =NetWorkUtils.isGPSEnabled();
         Log.d("jiejie","网络是否连接 " + isNetWork + "  WIFI " +isWifi + "    MOBILE " + isMobile + "   GPS " + isGPS);
+        // 定义并实例化过滤器
+        IntentFilter filter = new IntentFilter();
+        // 添加过滤器的值
+        filter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
+        //filter.addAction("android.net.wifi.WIFI_STATE_CHANGED");
+       // filter.addAction("android.net.wifi.STATE_CHANGE");
+        // 实例化广播监听器
+        mReceiver = new NetworkConnectChangedReceiver();
+        // 将广播监听器和过滤器注册在一起
+        registerReceiver(mReceiver,filter);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // 销毁Activity时取消注册
+        unregisterReceiver(mReceiver);
     }
 
     @Override
