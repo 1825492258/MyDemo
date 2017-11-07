@@ -37,7 +37,7 @@
         添加Marker，和在地图中心添加一个Marker
         设置Zoom 移动地图中心到某个点 移动地图在2点的可视范围
         路径的规划,获取路径并画出来
-        注:定位的时候需要添加定位的动态权限ACCESS_COARSE_LOCATION
+    5.3 注:定位的时候需要添加定位的动态权限 ACCESS_COARSE_LOCATION
 
 ### 6.OkHttp3.0的基本的使用
     6.1 项目中GET的封装

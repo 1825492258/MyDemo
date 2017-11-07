@@ -7,6 +7,7 @@ import java.util.concurrent.CopyOnWriteArraySet;
 
 /**
  * Created by wuzongjie on 2017/11/1.
+ * 用于发送消息
  */
 
 public class RxBus {
@@ -21,7 +22,10 @@ public class RxBus {
     public synchronized void register(Object subscriber) {
         subscibers.add(subscriber);
     }
-    /**解除注册*/
+
+    /**
+     * 解除注册
+     */
     public synchronized void unRegister(Object subscriber) {
         subscibers.remove(subscriber);
     }
@@ -45,6 +49,7 @@ public class RxBus {
      * 反射获取对象方法列表，判断
      * 1.是否被注释修饰
      * 2.参数是否和data类型一致
+     *
      * @param target
      * @param data
      */
