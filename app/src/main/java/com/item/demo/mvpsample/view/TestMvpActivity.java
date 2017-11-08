@@ -11,6 +11,7 @@ import com.item.demo.R;
 import com.item.demo.activity.load.DialogActivity;
 import com.item.demo.mvpsample.presenter.ITestMvpPresenter;
 import com.item.demo.mvpsample.presenter.TestMapPresenterImpl;
+import com.item.demo.utils.dialog.MyLoadDialog;
 
 /**
  * MVP 模式的初体验
@@ -21,6 +22,7 @@ public class TestMvpActivity extends AppCompatActivity implements ITestMvpView, 
     private ITestMvpPresenter mPresenter;
     private Button btnHttp;
     private TextView tvText;
+    private MyLoadDialog mDialog; // 显示的弹窗
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,15 +45,22 @@ public class TestMvpActivity extends AppCompatActivity implements ITestMvpView, 
         tvText.setText(info);
     }
 
-
+    /**
+     * 展示弹窗
+     */
     @Override
     public void showLoading() {
-
+        if (mDialog == null) {
+            mDialog = new MyLoadDialog(this);
+        }
+        mDialog.show();
     }
 
     @Override
     public void dissimssLoading() {
-
+        if (mDialog != null && mDialog.isShowing()) {
+            mDialog.dismiss();
+        }
     }
 
     @Override

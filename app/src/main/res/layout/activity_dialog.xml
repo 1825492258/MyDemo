@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.item.demo.activity.load.DialogActivity">
+
     <Button
-        android:layout_width="match_parent"
         android:id="@+id/btn_dialog_dialog"
+        android:layout_width="wrap_content"
+        android:text="弹窗"
+        android:layout_height="wrap_content" />
+    <Button
+        android:layout_toRightOf="@id/btn_dialog_dialog"
+        android:layout_width="wrap_content"
+        android:id="@+id/btn_dialog_one"
+        android:text="展示一个Dialog"
         android:layout_height="wrap_content" />
 
-</LinearLayout>
+    <com.item.demo.utils.dialog.widget.LoadingView
+        android:id="@+id/loadView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        app:loadingText="@string/app_name" />
+</RelativeLayout>

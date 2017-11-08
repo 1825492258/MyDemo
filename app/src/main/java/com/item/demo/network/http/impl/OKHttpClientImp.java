@@ -132,7 +132,7 @@ public class OKHttpClientImp implements IHttpClient {
                 if (response.isSuccessful()) {
                     setSuccessCall(response.code(), response.body().string(), callBack);
                 } else {
-                    Log.d("jiejie",response.code() + "  " + response.body().string());
+                    Log.d("jiejie", response.code() + "  " + response.body().string());
                     setFailureCall(response.code(), callBack);
                 }
             }

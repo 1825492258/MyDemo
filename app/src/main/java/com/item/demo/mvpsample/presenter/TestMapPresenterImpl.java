@@ -34,12 +34,13 @@ public class TestMapPresenterImpl implements ITestMvpPresenter {
         mModel.login(phone, code, new BaseModelCallBack() {
             @Override
             public void onResponse(BaseResponse response) {
-                Log.d("jiejie","----------");
-                mView.onInfoUpdate("成功" +response.getCode() + "  " + response.getData());
+                mView.dissimssLoading();
+                mView.onInfoUpdate("成功" + response.getCode() + "  " + response.getData());
             }
 
             @Override
             public void onFailure(int code) {
+                mView.dissimssLoading();
                 mView.showError(code);
             }
         });
