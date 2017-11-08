@@ -72,6 +72,12 @@
         <Button
             android:id="@+id/btn_nine"
             android:layout_width="match_parent"
+            android:text="UltraViewPager的使用"
+            android:layout_height="wrap_content" />
+        <Button
+            android:layout_width="match_parent"
+            android:id="@+id/btn_ten"
+            android:text="MVP 体验下"
             android:layout_height="wrap_content" />
     </LinearLayout>
 </com.scwang.smartrefresh.layout.SmartRefreshLayout>

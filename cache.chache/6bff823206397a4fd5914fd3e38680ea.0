@@ -1,0 +1,18 @@
+http://httpbin.org/get?id=ic?code=3
+GET
+0
+HTTP/1.1 200 OK
+13
+Connection: keep-alive
+Server: meinheld/0.6.1
+Date: Mon, 06 Nov 2017 01:46:07 GMT
+Content-Type: application/json
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Credentials: true
+X-Powered-By: Flask
+X-Processed-Time: 0.000792026519775
+Content-Length: 322
+Via: 1.1 vegur
+Cache-Control: public, max-age=30
+OkHttp-Sent-Millis: 1509932748024
+OkHttp-Received-Millis: 1509932748421

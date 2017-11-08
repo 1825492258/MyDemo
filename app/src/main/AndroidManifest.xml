@@ -89,8 +89,9 @@
         <activity android:name=".activity.refresh.MyListActivity" />
         <activity android:name=".test.TestTwoActivity" />
         <activity android:name=".activity.map.PositionActivity" />
-        <activity android:name=".activity.mvp.MyMVPActivity" />
-        <activity android:name=".activity.ult.UltActivity"></activity>
+        <activity android:name=".activity.ult.UltActivity" />
+        <activity android:name=".mvpsample.view.TestMvpActivity" />
+        <activity android:name=".activity.load.DialogActivity"></activity>
     </application>
 
 </manifest>

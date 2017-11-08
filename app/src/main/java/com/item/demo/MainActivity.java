@@ -25,6 +25,7 @@ import com.item.demo.activity.refresh.RefreshActivity;
 import com.item.demo.activity.refresh.TextRefreshActivity;
 import com.item.demo.activity.ult.UltActivity;
 import com.item.demo.entity.TestBean;
+import com.item.demo.mvpsample.view.TestMvpActivity;
 import com.item.demo.network.http.IHttpClient;
 import com.item.demo.network.http.IRequest;
 import com.item.demo.network.http.impl.BaseRequest;
@@ -57,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.btn_seven).setOnClickListener(this);
         findViewById(R.id.btn_eight).setOnClickListener(this);
         findViewById(R.id.btn_nine).setOnClickListener(this);
+        findViewById(R.id.btn_ten).setOnClickListener(this);
     }
 
     /**
@@ -125,6 +127,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn_nine: // UltraViewPager的使用
                 startActivity(new Intent(this, UltActivity.class));
+                break;
+            case R.id.btn_ten: // MVP的初体验
+                startActivity(new Intent(this, TestMvpActivity.class));
                 break;
         }
     }

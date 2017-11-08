@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.item.demo.mvpsample.view.TestMvpActivity">
+
+    <Button
+        android:id="@+id/btn_test_http"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="请求网络接口"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/tv_test_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:text="这里是接口返回的数据"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/btn_test_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="去弹窗的界面" />
+</LinearLayout>
