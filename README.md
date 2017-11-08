@@ -90,4 +90,7 @@
 
 ### 11.添加加载的弹窗
 
+### 12.添加水波条纹的效果
+    使用别人的jar https://github.com/race604/WaveLoading 来达成效果
+
 

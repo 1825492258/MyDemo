@@ -24,6 +24,7 @@ import com.item.demo.activity.refresh.BasicUsingActivity;
 import com.item.demo.activity.refresh.RefreshActivity;
 import com.item.demo.activity.refresh.TextRefreshActivity;
 import com.item.demo.activity.ult.UltActivity;
+import com.item.demo.activity.wave.WaveActivity;
 import com.item.demo.entity.TestBean;
 import com.item.demo.mvpsample.view.TestMvpActivity;
 import com.item.demo.network.http.IHttpClient;
@@ -59,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.btn_eight).setOnClickListener(this);
         findViewById(R.id.btn_nine).setOnClickListener(this);
         findViewById(R.id.btn_ten).setOnClickListener(this);
+        findViewById(R.id.btn_main_one).setOnClickListener(this);
     }
 
     /**
@@ -117,7 +119,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn_six:
                 // 测试视频
-                startActivity(new Intent(this, TestTwoActivity.class));
+                // TODO: 2017/11/8 有问题以后再处理吧
+               //  startActivity(new Intent(this, TestTwoActivity.class));
                 break;
             case R.id.btn_seven: // 测试高德地图的封装
                 startActivity(new Intent(this, MyMapActivity.class));
@@ -130,6 +133,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn_ten: // MVP的初体验
                 startActivity(new Intent(this, TestMvpActivity.class));
+                break;
+            case R.id.btn_main_one: // 水波纹
+                startActivity(new Intent(this, WaveActivity.class));
                 break;
         }
     }

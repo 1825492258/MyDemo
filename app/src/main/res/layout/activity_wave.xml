@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.item.demo.activity.wave.WaveActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="340dp"
+        android:background="#2671f6">
+
+        <com.gelitenight.waveview.library.WaveView
+            android:id="@+id/wave"
+            android:layout_gravity="bottom"
+            android:layout_width="match_parent"
+            android:layout_height="160dp" />
+    </FrameLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="水波纹的效果"
+        android:textColor="#000000"
+        android:textSize="@dimen/font_14" />
+</LinearLayout>

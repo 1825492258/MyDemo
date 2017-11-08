@@ -57,6 +57,7 @@ dependencies {
     compile 'com.github.LuckSiege.PictureSelector:picture_library:v2.1.5'
     compile 'tv.danmaku.ijk.media:ijkplayer-java:0.8.4'
     compile 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.8.4'
+    compile 'com.gelitenight.waveview:waveview:1.0.0'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 }
