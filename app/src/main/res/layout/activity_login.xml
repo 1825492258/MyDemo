@@ -41,7 +41,7 @@
             android:background="@null"
             android:hint="@string/input_phone"
             android:inputType="phone"
-
+            android:textColor="@color/text_383"
             android:maxLines="1"
             android:textColorHint="@color/text_999"
             android:textCursorDrawable="@drawable/shape_edit" />
@@ -74,6 +74,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
+            android:textColor="@color/text_383"
             android:background="@null"
             android:hint="@string/input_code"
             android:inputType="number"

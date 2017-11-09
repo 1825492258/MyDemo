@@ -24,13 +24,33 @@ public class ITestMvpImpl implements ITestMvpModel {
         OKHttpClientImp.getInstance().get(request, false, new IHttpClient.RequestCallBack() {
             @Override
             public void onSuccess(BaseResponse response) {
-                Log.d("jiejie", "login" + response.getCode() + "  " + response.getData());
                 baseModelCallBack.onResponse(response);
             }
 
             @Override
             public void onFailure(int code) {
-                Log.d("jiejie", "login onFail" + code);
+                baseModelCallBack.onFailure(code);
+            }
+        });
+    }
+
+    /**
+     * 发送验证码
+     *
+     * @param phone             手机号
+     * @param baseModelCallBack 回调
+     */
+    @Override
+    public void getCode(String phone, final BaseModelCallBack baseModelCallBack) {
+        IRequest request = new BaseRequest(HttpConstants.VERIFICATION_CODE_URL + phone);
+        OKHttpClientImp.getInstance().get(request, false, new IHttpClient.RequestCallBack() {
+            @Override
+            public void onSuccess(BaseResponse response) {
+                baseModelCallBack.onResponse(response);
+            }
+
+            @Override
+            public void onFailure(int code) {
                 baseModelCallBack.onFailure(code);
             }
         });

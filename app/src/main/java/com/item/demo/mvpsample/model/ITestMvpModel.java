@@ -13,4 +13,6 @@ public interface ITestMvpModel {
      * @param code 验证码
      */
     void login(String phone, String code, BaseModelCallBack baseModelCallBack);
+
+    void getCode(String phone,BaseModelCallBack baseModelCallBack);
 }

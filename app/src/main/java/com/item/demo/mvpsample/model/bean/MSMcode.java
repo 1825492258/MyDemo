@@ -1,4 +1,4 @@
-package com.item.demo.entity;
+package com.item.demo.mvpsample.model.bean;
 
 import com.item.demo.network.http.biz.BaseBizResponse;
 

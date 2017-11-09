@@ -1,23 +1,18 @@
 package com.item.demo.activity.http;
 
 import android.content.IntentFilter;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.item.demo.R;
 import com.item.demo.activity.base.BaseActivity;
-import com.item.demo.entity.MSMcode;
-import com.item.demo.entity.UserInfo;
+import com.item.demo.mvpsample.model.bean.MSMcode;
 import com.item.demo.network.http.IHttpClient;
 import com.item.demo.network.http.IRequest;
-import com.item.demo.network.http.IResponse;
-import com.item.demo.network.http.biz.BaseBizResponse;
 import com.item.demo.network.http.impl.BaseRequest;
 import com.item.demo.network.http.impl.BaseResponse;
 import com.item.demo.network.http.impl.OKHttpClientImp;
