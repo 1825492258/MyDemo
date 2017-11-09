@@ -33,6 +33,7 @@ public class TestMvpActivity extends AppCompatActivity implements ITestMvpView, 
         mPresenter = new TestMapPresenterImpl(this);
         btnHttp.setOnClickListener(this);
         findViewById(R.id.btn_test_dialog).setOnClickListener(this);
+        findViewById(R.id.btn_test_login).setOnClickListener(this);
     }
 
     /**
@@ -76,6 +77,9 @@ public class TestMvpActivity extends AppCompatActivity implements ITestMvpView, 
                 break;
             case R.id.btn_test_dialog: // 去弹窗
                 startActivity(new Intent(this, DialogActivity.class));
+                break;
+            case R.id.btn_test_login: // 去登录的界面
+                startActivity(new Intent(this, LoginActivity.class));
                 break;
         }
     }

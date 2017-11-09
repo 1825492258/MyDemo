@@ -5,6 +5,12 @@ import java.lang.reflect.Method;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
+
 /**
  * Created by wuzongjie on 2017/11/1.
  * 用于发送消息
@@ -43,6 +49,27 @@ public class RxBus {
             }
         }
         return instance;
+    }
+
+    /**
+     * 包装处理过程
+     *
+     * @param func
+     */
+    public void chainProcess(Function func) {
+        Observable.just("")
+                .subscribeOn(Schedulers.io()) // 指定处理过程在 IO 线程
+                .map(func)   // 包装处理过程
+                .observeOn(AndroidSchedulers.mainThread())  // 指定事件消费在 Main 线程
+                .subscribe(new Consumer() {
+                    @Override
+                    public void accept(Object o) throws Exception {
+                        if (o == null) {
+                            return;
+                        }
+                        send(o);
+                    }
+                });
     }
 
     /**

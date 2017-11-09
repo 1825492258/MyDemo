@@ -92,7 +92,8 @@
         <activity android:name=".activity.ult.UltActivity" />
         <activity android:name=".mvpsample.view.TestMvpActivity" />
         <activity android:name=".activity.load.DialogActivity" />
-        <activity android:name=".activity.wave.WaveActivity"></activity>
+        <activity android:name=".activity.wave.WaveActivity" />
+        <activity android:name=".mvpsample.view.LoginActivity"></activity>
     </application>
 
 </manifest>

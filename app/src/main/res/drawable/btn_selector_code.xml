@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item android:state_enabled="false">
+        <shape>
+
+            <!-- 色值 -->
+            <solid android:color="#dedede" />
+            <!-- 圆角 -->
+            <corners android:radius="8dp" />
+        </shape>
+    </item>
+
+    <!-- 点击背景 -->
+    <item android:state_pressed="true">
+        <shape>
+
+            <!-- 色值 -->
+            <solid android:color="#146EF3" />
+            <corners android:radius="8dp" />
+
+        </shape>
+    </item>
+    <!-- 默认背景 -->
+    <item>
+        <shape>
+            <solid android:color="#3385ff" />
+            <corners android:radius="8dp" />
+        </shape>
+    </item>
+
+
+</selector>

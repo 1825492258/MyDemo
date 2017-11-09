@@ -21,7 +21,7 @@ public class WaveActivity extends AppCompatActivity {
         WaveView waveView = (WaveView) findViewById(R.id.wave);
         mWaveHelper = new WaveHelper(waveView);
         waveView.setShapeType(WaveView.ShapeType.SQUARE); // 矩形
-        waveView.setWaveColor(Color.parseColor("#045ee6"),Color.parseColor("#805196fe"));
+        waveView.setWaveColor(Color.parseColor("#045ee6"), Color.parseColor("#805196fe"));
     }
 
     @Override
