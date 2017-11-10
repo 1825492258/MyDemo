@@ -93,7 +93,8 @@
         <activity android:name=".mvpsample.view.TestMvpActivity" />
         <activity android:name=".activity.load.DialogActivity" />
         <activity android:name=".activity.wave.WaveActivity" />
-        <activity android:name=".mvpsample.view.LoginActivity"></activity>
+        <activity android:name=".mvpsample.view.LoginActivity" />
+        <activity android:name=".activity.refresh.WeiboPracticeActivity"></activity>
     </application>
 
 </manifest>

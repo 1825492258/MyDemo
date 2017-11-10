@@ -33,5 +33,11 @@
             android:layout_height="wrap_content"
             android:text="ListView悬浮头展示" />
 
+        <Button
+            android:id="@+id/btn_text_four"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="仿QQ空间的样式" />
+
     </LinearLayout>
 </com.scwang.smartrefresh.layout.SmartRefreshLayout>

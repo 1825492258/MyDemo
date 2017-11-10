@@ -97,4 +97,22 @@
 ### 12.添加水波条纹的效果
     使用别人的框架 https://github.com/race604/WaveLoading 来达成效果
 
+### 13.仿QQ空间实现顶部的渐变 (Shift + Tab 是向左缩进)
+    mScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+        private int lastScrollY = 0;
+        private int h = DensityUtils.dp2px(170);
+        private int color = ContextCompat.getColor(getApplicationContext(),R.color.colorPrimary)&0x00ffffff;
+        @Override
+        public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+           if(lastScrollY < h){
+               scrollY = Math.min(h,scrollY);
+               mScrollY = scrollY > h ? h : scrollY;
+               buttonBar.setAlpha(1f * mScrollY / h);
+               mToolbar.setBackgroundColor(((255 * mScrollY / h) << 24) | color);
+               mImageView.setTranslationY(mOffset - mScrollY);
+           }
+           lastScrollY = scrollY;
+        }
+    });
+
 
