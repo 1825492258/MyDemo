@@ -87,6 +87,10 @@
     9.1 用UltraViewPager来实现  https://github.com/alibaba/UltraViewPager
 
 ### 10.MVP的体验
+     所谓的MVP即是
+     model 处理业务逻辑（主要是数据读写，或者与后台通信）
+     view  处理UI控件
+     presenter 主导器，操作model和view 是Model和View之间的桥梁
 
 ### 11.添加加载的弹窗
 
