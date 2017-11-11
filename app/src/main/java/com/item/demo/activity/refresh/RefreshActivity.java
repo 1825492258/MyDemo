@@ -30,6 +30,7 @@ public class RefreshActivity extends BaseActivity implements View.OnClickListene
         btnTwo = (Button) findViewById(R.id.btn_text_two);
         btnThree = (Button) findViewById(R.id.btn_text_three);
         btnFour = (Button) findViewById(R.id.btn_text_four);
+        findViewById(R.id.btn_text_five).setOnClickListener(this);
         btnOne.setOnClickListener(this);
         btnTwo.setOnClickListener(this);
         btnThree.setOnClickListener(this);
@@ -50,6 +51,9 @@ public class RefreshActivity extends BaseActivity implements View.OnClickListene
                 break;
             case R.id.btn_text_four: // 仿QQ空间样式的实现
                 startActivity(new Intent(this,WeiboPracticeActivity.class));
+                break;
+            case R.id.btn_text_five:
+                startActivity(new Intent(this,NestedScrollActivity.class));
                 break;
         }
     }

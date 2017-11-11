@@ -39,5 +39,11 @@
             android:layout_height="wrap_content"
             android:text="仿QQ空间的样式" />
 
+        <Button
+            android:layout_width="match_parent"
+            android:text="宿便吧"
+            android:id="@+id/btn_text_five"
+            android:layout_height="wrap_content" />
+
     </LinearLayout>
 </com.scwang.smartrefresh.layout.SmartRefreshLayout>

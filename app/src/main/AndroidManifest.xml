@@ -94,7 +94,8 @@
         <activity android:name=".activity.load.DialogActivity" />
         <activity android:name=".activity.wave.WaveActivity" />
         <activity android:name=".mvpsample.view.LoginActivity" />
-        <activity android:name=".activity.refresh.WeiboPracticeActivity"></activity>
+        <activity android:name=".activity.refresh.WeiboPracticeActivity" />
+        <activity android:name=".activity.refresh.NestedScrollActivity"></activity>
     </application>
 
 </manifest>
